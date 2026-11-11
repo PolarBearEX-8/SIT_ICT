@@ -1,0 +1,726 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#193b3b">
+    <meta name="description" content="คู่มือ ICT Challenge 2026: คุณสมบัติทีม กลุ่มความรู้ รอบแข่งขัน กำหนดการ สถานที่ และรางวัล">
+    <link rel="canonical" href="https://polarbearex-8.github.io/SIT_ICT/">
+    <meta property="og:title" content="ICT Challenge 2026 | คู่มือผู้เข้าแข่งขัน">
+    <meta property="og:description" content="คุณสมบัติทีม กลุ่มความรู้ รอบแข่งขัน กำหนดการ สถานที่ และรางวัล">
+    <meta property="og:url" content="https://polarbearex-8.github.io/SIT_ICT/">
+    <title>ICT Challenge 2026 | คู่มือผู้เข้าแข่งขัน</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        color-scheme: light;
+        --paper: #f1f4ef;
+        --white: #fff;
+        --ink: #203137;
+        --muted: #667578;
+        --forest: #193b3b;
+        --forest-deep: #102c30;
+        --teal: #397a72;
+        --lime: #d9ee83;
+        --line: #dbe2dc;
+        --soft: #e7eee8;
+        --display: "Bai Jamjuree", "IBM Plex Sans Thai", Tahoma, sans-serif;
+        --body: "IBM Plex Sans Thai", Tahoma, sans-serif;
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; scroll-padding-top: 96px; }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: var(--body);
+        font-size: 16px;
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+      }
+      a { color: inherit; }
+      button, input { font: inherit; }
+      button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visible {
+        outline: 3px solid #7ba53d;
+        outline-offset: 4px;
+      }
+      .wrap { width: min(1160px, calc(100% - 56px)); margin: 0 auto; }
+      .site-header { border-bottom: 1px solid rgba(25,59,59,.12); }
+      .header-inner { min-height: 82px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+      .brand { display: inline-flex; align-items: center; gap: 11px; text-decoration: none; }
+      .brand-mark {
+        width: 40px; height: 40px; display: grid; place-items: center;
+        background: var(--forest); color: var(--lime); border-radius: 12px 4px 12px 4px;
+        font: 700 11px/1 var(--display); letter-spacing: .02em;
+      }
+      .brand-copy { display: grid; line-height: 1.25; }
+      .brand-copy strong { font: 700 15px/1.2 var(--display); letter-spacing: .01em; }
+      .brand-copy small { margin-top: 4px; color: var(--muted); font-size: 11px; }
+      .header-nav { display: flex; align-items: center; gap: 30px; }
+      .header-nav a { color: #526568; font-size: 13px; text-decoration: none; }
+      .header-nav a:hover { color: var(--forest); }
+      .header-cta {
+        display: inline-flex; align-items: center; gap: 9px; padding: 10px 15px;
+        border: 1px solid #bccbc2; border-radius: 3px; color: var(--forest);
+        text-decoration: none; font-size: 13px; font-weight: 600;
+      }
+      .header-cta:hover { background: var(--white); }
+      .header-cta svg, .primary-link svg { width: 16px; height: 16px; }
+
+      .hero { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(320px, .8fr); align-items: center; gap: 64px; padding: 68px 0 72px; }
+      .eyebrow { display: flex; align-items: center; gap: 9px; margin: 0 0 22px; color: var(--teal); font-size: 13px; font-weight: 600; }
+      .eyebrow-dot { width: 8px; height: 8px; border-radius: 50%; background: #6c9d53; box-shadow: 0 0 0 4px #dcebd2; }
+      h1, h2, h3, p { margin-top: 0; }
+      h1 { max-width: 700px; margin-bottom: 18px; color: var(--forest-deep); font: 700 clamp(42px, 5.3vw, 68px)/1.15 var(--display); letter-spacing: -.04em; }
+      .hero-copy { max-width: 580px; margin-bottom: 27px; color: #5c6d6d; font-size: 16px; line-height: 1.9; }
+      .event-facts { display: grid; grid-template-columns: .9fr 1.1fr; gap: 21px; max-width: 590px; margin: 0 0 15px; }
+      .event-facts div { display: grid; align-content: start; gap: 3px; }
+      .event-facts span, .application-dates span { color: #71817f; font-size: 11px; }
+      .event-facts strong { color: var(--forest); font-size: 12px; font-weight: 600; line-height: 1.6; }
+      .application-dates { display: flex; flex-wrap: wrap; align-items: baseline; gap: 3px 9px; margin: 0 0 23px; color: var(--forest); font-size: 12px; }
+      .application-dates strong { margin-right: 8px; font-weight: 600; }
+      .primary-link { display: inline-flex; align-items: center; gap: 12px; padding: 13px 18px; border-radius: 3px; background: var(--forest); color: white; text-decoration: none; font-size: 14px; font-weight: 600; }
+      .primary-link:hover { background: var(--forest-deep); }
+      .primary-link svg { color: var(--lime); }
+      .text-link { color: var(--forest); font-size: 12px; font-weight: 600; text-decoration: underline; text-underline-offset: 4px; }
+      .text-link span { color: var(--teal); }
+      .route-note {
+        position: relative; isolation: isolate; overflow: hidden; padding: 29px 30px 27px;
+        min-height: 306px; background: var(--forest); color: white;
+        border-radius: 5px 5px 42px 5px;
+      }
+      .route-note::before, .route-note::after {
+        position: absolute; z-index: -1; content: ""; border: 1px solid rgba(217,238,131,.24); border-radius: 50%;
+      }
+      .route-note::before { width: 220px; height: 220px; right: -93px; top: -100px; }
+      .route-note::after { width: 148px; height: 148px; right: -57px; top: -64px; }
+      .note-label { display: inline-flex; align-items: center; gap: 9px; margin-bottom: 22px; color: var(--lime); font-size: 12px; font-weight: 600; }
+      .note-label::before { content: ""; width: 17px; height: 1px; background: var(--lime); }
+      .route-note h2 { max-width: 260px; margin-bottom: 22px; font: 600 21px/1.5 var(--body); }
+      .check-list { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+      .check-list li { display: grid; grid-template-columns: 20px 1fr; align-items: start; gap: 10px; color: #e0eae3; font-size: 13px; line-height: 1.65; }
+      .checkmark { width: 19px; height: 19px; display: grid; place-items: center; border-radius: 50%; background: rgba(217,238,131,.16); color: var(--lime); font-size: 12px; line-height: 1; }
+
+      .eligibility-section { background: var(--soft); }
+      .eligibility-inner { padding: 58px 0 67px; }
+      .eligibility-layout { display: grid; grid-template-columns: minmax(0,1.12fr) minmax(290px,.88fr); align-items: start; gap: 55px; }
+      .requirement-list { display: grid; }
+      .requirement-item { display: grid; grid-template-columns: 130px minmax(0,1fr); gap: 17px; padding: 18px 0; border-top: 1px solid #cfdad2; }
+      .requirement-item h3 { margin: 0; color: var(--forest); font-size: 13px; font-weight: 600; }
+      .requirement-item p { margin: 0; color: #596a69; font-size: 13px; line-height: 1.85; }
+      .selection-box { padding: 24px 25px 22px; background: var(--forest); color: white; border-radius: 3px 3px 25px 3px; }
+      .selection-box h3 { margin: 0 0 14px; color: var(--lime); font: 600 16px/1.5 var(--body); }
+      .selection-box ul { display: grid; gap: 11px; margin: 0; padding-left: 18px; color: #e0e9e2; font-size: 11px; line-height: 1.8; }
+
+      .knowledge-section { background: var(--forest-deep); color: white; }
+      .knowledge-inner { padding: 63px 0 70px; }
+      .knowledge-heading { display: flex; align-items: end; justify-content: space-between; gap: 40px; padding-bottom: 31px; }
+      .knowledge-kicker { margin: 0 0 11px; color: var(--lime); font-size: 12px; font-weight: 600; }
+      .knowledge-title { margin: 0; font: 700 clamp(31px, 4vw, 45px)/1.3 var(--display); letter-spacing: -.03em; }
+      .knowledge-lede { max-width: 400px; margin: 0 0 4px; color: #c4d2cc; font-size: 13px; line-height: 1.9; }
+      .topic-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 52px; margin: 0; padding: 0; list-style: none; }
+      .topic-card { display: grid; grid-template-columns: 30px minmax(0,1fr); gap: 14px; padding: 23px 0 22px; border-top: 1px solid rgba(255,255,255,.2); }
+      .topic-number { padding-top: 3px; color: var(--lime); font: 700 15px/1.4 var(--display); }
+      .topic-card h3 { margin: 0 0 10px; color: white; font: 600 16px/1.6 var(--body); }
+      .topic-card p { max-width: 500px; margin: 0 0 13px; color: #c4d2cc; font-size: 12px; line-height: 1.9; }
+      .topic-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+      .topic-tags span { padding: 2px 7px; border: 1px solid rgba(217,238,131,.32); color: #e0ebdf; font-size: 10px; line-height: 1.8; }
+
+      .rounds-section { background: var(--white); border-top: 1px solid #e6ebe6; }
+      .rounds-inner { padding: 66px 0 70px; }
+      .round-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0 54px; margin: 0; padding: 0; list-style: none; }
+      .round-item { display: grid; grid-template-columns: 34px minmax(0,1fr); gap: 15px; padding: 22px 0 24px; border-top: 1px solid var(--line); }
+      .round-number { padding-top: 2px; color: var(--teal); font: 700 15px/1.4 var(--display); }
+      .round-when { display: block; margin: 0 0 7px; color: #748580; font-size: 10px; font-weight: 600; }
+      .round-item h3 { margin: 0 0 8px; color: var(--forest); font: 600 15px/1.55 var(--body); }
+      .round-item p { margin: 0; color: #5e6d6d; font-size: 12px; line-height: 1.9; }
+      .rule-note { margin: 9px 0 0; padding: 13px 16px; border-left: 3px solid #8cae6d; background: var(--soft); color: #566968; font-size: 11px; line-height: 1.8; }
+
+      .schedule-section { background: var(--soft); }
+      .schedule-inner { padding: 65px 0 69px; }
+      .schedule-heading { display: flex; align-items: end; justify-content: space-between; gap: 30px; margin-bottom: 27px; }
+      .schedule-heading .section-title { margin-bottom: 0; }
+      .schedule-location { display: grid; gap: 3px; text-align: right; }
+      .schedule-location strong { color: var(--forest); font-size: 12px; }
+      .schedule-location span { color: #6c7c79; font-size: 11px; }
+      .important-dates-title, .day-schedule-title { margin: 0 0 12px; color: var(--forest); font: 600 14px/1.5 var(--body); }
+      .important-date-list { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 0 22px; margin: 0 0 30px; padding: 0; list-style: none; }
+      .important-date { display: grid; align-content: start; gap: 4px; padding: 12px 0; border-top: 1px solid #cbd6ce; }
+      .important-date time { color: var(--teal); font: 600 11px/1.5 var(--display); }
+      .important-date span { color: #5f706d; font-size: 10px; line-height: 1.7; }
+      .schedule-list { margin: 0; padding: 0; border-top: 1px solid #cbd6ce; list-style: none; }
+      .schedule-item { display: grid; grid-template-columns: 118px minmax(0,1fr) 235px; gap: 20px; align-items: baseline; padding: 13px 0; border-bottom: 1px solid #cbd6ce; }
+      .schedule-time { color: var(--forest); font: 600 12px/1.7 var(--display); }
+      .schedule-activity { color: #304446; font-size: 12px; font-weight: 600; line-height: 1.75; }
+      .schedule-place { color: #6d7c79; font-size: 11px; line-height: 1.7; }
+      .schedule-note { margin: 14px 0 0; color: #687875; font-size: 10px; }
+
+      .awards-section { background: var(--white); }
+      .awards-inner { padding: 66px 0 75px; }
+      .award-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; }
+      .award-card { min-height: 156px; padding: 18px 18px 17px; border-top: 3px solid #9dbb83; background: var(--paper); }
+      .award-card h3 { margin: 0 0 8px; color: var(--forest); font: 600 13px/1.5 var(--body); }
+      .award-amount { margin: 0 0 8px; color: var(--teal); font: 700 22px/1.3 var(--display); }
+      .award-card p:last-child { margin: 0; color: #6a7876; font-size: 10px; line-height: 1.7; }
+      .award-notes { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 28px; margin: 19px 0 0; padding: 16px 18px 16px 34px; background: #f5f7f3; color: #5d6c6a; font-size: 11px; line-height: 1.85; }
+
+      .faq-section { background: var(--white); border-top: 1px solid #e6ebe6; }
+      .section-inner { padding: 68px 0 82px; }
+      .section-head { display: flex; align-items: end; justify-content: space-between; gap: 30px; margin-bottom: 30px; }
+      .section-intro { max-width: 520px; }
+      .section-kicker { margin-bottom: 9px; color: var(--teal); font-size: 12px; font-weight: 600; }
+      h2.section-title { margin-bottom: 8px; font: 700 35px/1.3 var(--display); letter-spacing: -.025em; }
+      .section-description { margin: 0; color: var(--muted); font-size: 14px; }
+      .question-total { flex: 0 0 auto; color: var(--muted); font-size: 13px; }
+      .question-total strong { color: var(--forest); font: 700 30px/1 var(--display); vertical-align: -2px; }
+      .controls { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 19px 28px; margin: 0 0 30px; padding: 17px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+      .filters { display: flex; flex-wrap: wrap; gap: 5px 23px; }
+      .filter-button { position: relative; padding: 3px 0; border: 0; background: transparent; color: #667578; cursor: pointer; font-size: 13px; }
+      .filter-button::after { position: absolute; right: 0; bottom: -4px; left: 0; height: 2px; background: transparent; content: ""; }
+      .filter-button:hover, .filter-button[aria-pressed="true"] { color: var(--forest); }
+      .filter-button[aria-pressed="true"] { font-weight: 600; }
+      .filter-button[aria-pressed="true"]::after { background: var(--teal); }
+      .search-box { display: flex; align-items: center; gap: 10px; width: min(310px, 100%); }
+      .search-box svg { width: 18px; height: 18px; flex: 0 0 auto; color: #738381; }
+      .search-box input { width: 100%; min-width: 0; padding: 8px 0; border: 0; border-bottom: 1px solid #cbd6cf; border-radius: 0; outline-offset: 3px; color: var(--ink); background: transparent; font-size: 13px; }
+      .search-box input::placeholder { color: #8a9895; }
+      .faq-layout { display: grid; grid-template-columns: minmax(0, 1fr) 296px; align-items: start; gap: 66px; }
+      .faq-list { min-width: 0; }
+      .faq-group + .faq-group { margin-top: 34px; }
+      .group-heading { display: flex; align-items: center; gap: 10px; margin: 0 0 8px; color: #63827c; font-size: 12px; font-weight: 600; }
+      .group-heading::before { width: 7px; height: 7px; border-radius: 2px; background: #99bd8e; content: ""; transform: rotate(45deg); }
+      .faq-item { border-top: 1px solid var(--line); }
+      .faq-item:last-child { border-bottom: 1px solid var(--line); }
+      .faq-item summary { display: grid; grid-template-columns: minmax(0,1fr) 28px; align-items: center; gap: 20px; padding: 20px 1px; color: var(--ink); cursor: pointer; list-style: none; }
+      .faq-item summary::-webkit-details-marker { display: none; }
+      .question-text { font-size: 15px; font-weight: 600; line-height: 1.65; }
+      .expand-icon { position: relative; width: 26px; height: 26px; border: 1px solid #cfdbd2; border-radius: 50%; }
+      .expand-icon::before, .expand-icon::after { position: absolute; top: 50%; left: 50%; width: 9px; height: 1px; background: var(--teal); content: ""; transform: translate(-50%,-50%); transition: transform .18s ease; }
+      .expand-icon::after { transform: translate(-50%,-50%) rotate(90deg); }
+      .faq-item[open] .expand-icon::after { transform: translate(-50%,-50%) rotate(0); }
+      .faq-item[open] summary { color: var(--forest); }
+      .answer { max-width: 690px; padding: 0 45px 20px 1px; color: #5f6e70; font-size: 14px; line-height: 1.9; }
+      .answer p { margin: 0; }
+      .empty-state { padding: 28px 0; border-top: 1px solid var(--line); color: var(--muted); }
+      .empty-state strong { display: block; margin-bottom: 5px; color: var(--ink); }
+      .clear-search { margin-top: 14px; padding: 0; border: 0; border-bottom: 1px solid #79948a; background: none; color: var(--forest); cursor: pointer; font-size: 13px; }
+
+      .contact-box { position: sticky; top: 24px; padding: 25px 23px 23px; background: var(--forest); color: white; border-radius: 3px 3px 28px 3px; }
+      .contact-box h3 { max-width: 215px; margin: 0 0 7px; font: 600 20px/1.45 var(--body); }
+      .contact-intro { margin-bottom: 20px; color: #c5d4ce; font-size: 12px; line-height: 1.8; }
+      .contact-row { display: grid; grid-template-columns: 61px 1fr; gap: 9px; padding: 12px 0; border-top: 1px solid rgba(255,255,255,.16); font-size: 12px; }
+      .contact-row span:first-child { color: #adbfba; }
+      .contact-row a, .contact-row strong { color: white; text-decoration: none; font-weight: 500; overflow-wrap: anywhere; }
+      .contact-row a:hover { color: var(--lime); text-decoration: underline; text-underline-offset: 3px; }
+      .contact-links { display: grid; gap: 9px; margin-top: 19px; }
+      .contact-links a { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 11px 12px; border: 1px solid rgba(255,255,255,.25); color: #f4f7f2; text-decoration: none; font-size: 12px; }
+      .contact-links a:hover { border-color: var(--lime); color: var(--lime); }
+      .contact-links span { color: var(--lime); font-size: 17px; line-height: 1; }
+      .site-footer { padding: 21px 0 25px; color: #788782; font-size: 11px; }
+      .footer-inner { display: flex; justify-content: space-between; gap: 20px; }
+      .footer-inner p { margin: 0; }
+      .footer-inner a { color: #536b68; text-decoration: none; }
+      .footer-inner a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+      @media (max-width: 880px) {
+        .hero { grid-template-columns: minmax(0, 1fr) minmax(270px, .8fr); gap: 34px; }
+        .eligibility-layout { grid-template-columns: 1fr 300px; gap: 30px; }
+        .topic-grid { gap: 0 30px; }
+        .round-list { gap: 0 30px; }
+        .schedule-item { grid-template-columns: 105px minmax(0,1fr) 190px; gap: 14px; }
+        .award-grid { gap: 9px; }
+        .award-card { padding-inline: 14px; }
+        .faq-layout { grid-template-columns: minmax(0, 1fr) 260px; gap: 38px; }
+        .header-nav { gap: 14px; }
+        .header-nav a { font-size: 12px; }
+      }
+      @media (max-width: 700px) {
+        .wrap { width: min(100% - 36px, 560px); }
+        .header-inner { min-height: 70px; }
+        .header-nav { display: none; }
+        .header-cta { padding: 8px 10px; font-size: 12px; }
+        .hero { grid-template-columns: 1fr; gap: 30px; padding: 48px 0 54px; }
+        h1 { max-width: 520px; font-size: clamp(40px, 11vw, 58px); }
+        .hero-copy { font-size: 14px; }
+        .event-facts { grid-template-columns: 1fr; gap: 10px; }
+        .application-dates { font-size: 11px; }
+        .route-note { min-height: unset; padding: 23px 23px 24px; }
+        .eligibility-inner, .rounds-inner, .schedule-inner, .awards-inner { padding: 49px 0 54px; }
+        .eligibility-layout { grid-template-columns: 1fr; gap: 24px; }
+        .requirement-item { grid-template-columns: 1fr; gap: 4px; padding: 14px 0; }
+        .selection-box { padding: 20px; }
+        .knowledge-inner { padding: 48px 0 53px; }
+        .knowledge-heading { align-items: start; flex-direction: column; gap: 13px; padding-bottom: 22px; }
+        .knowledge-title { font-size: 30px; }
+        .knowledge-lede { font-size: 12px; }
+        .topic-grid { grid-template-columns: 1fr; gap: 0; }
+        .topic-card { gap: 12px; padding: 19px 0; }
+        .topic-card h3 { font-size: 15px; }
+        .round-list { grid-template-columns: 1fr; gap: 0; }
+        .schedule-heading { align-items: start; flex-direction: column; gap: 9px; }
+        .schedule-location { text-align: left; }
+        .important-date-list { grid-template-columns: 1fr 1fr; gap: 0 16px; margin-bottom: 24px; }
+        .schedule-item { grid-template-columns: 1fr; gap: 2px; padding: 12px 0; }
+        .award-grid { grid-template-columns: 1fr 1fr; }
+        .award-card { min-height: unset; }
+        .award-notes { grid-template-columns: 1fr; gap: 7px; }
+        .section-inner { padding: 50px 0 57px; }
+        .section-head { align-items: start; margin-bottom: 23px; }
+        h2.section-title { font-size: 30px; }
+        .section-description { max-width: 390px; font-size: 13px; }
+        .question-total { padding-top: 6px; font-size: 0; }
+        .question-total strong { font-size: 25px; }
+        .controls { align-items: stretch; gap: 17px; }
+        .filters { flex-wrap: nowrap; overflow-x: auto; margin-right: -18px; padding: 0 18px 5px 0; scrollbar-width: thin; }
+        .filter-button { flex: 0 0 auto; }
+        .search-box { width: 100%; }
+        .faq-layout { grid-template-columns: 1fr; gap: 38px; }
+        .contact-box { position: static; }
+        .footer-inner { flex-direction: column; gap: 5px; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        *, *::before, *::after { transition-duration: .01ms !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a class="brand" href="#top" aria-label="กลับไปด้านบน">
+          <span class="brand-mark" aria-hidden="true">ICT</span>
+          <span class="brand-copy"><strong>SIT · KMUTT</strong><small>คู่มือผู้เข้าแข่งขัน</small></span>
+        </a>
+        <nav class="header-nav" aria-label="เมนูหลัก">
+          <a href="#eligibility">คุณสมบัติ</a>
+          <a href="#topics">ขอบเขตข้อสอบ</a>
+          <a href="#rounds">รอบแข่งขัน</a>
+          <a href="#schedule">กำหนดการ</a>
+          <a href="#awards">รางวัล</a>
+          <a href="#contact">ติดต่อทีมงาน</a>
+        </nav>
+        <a class="header-cta" href="#contact">สอบถามทีมงาน
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="wrap hero" aria-labelledby="hero-title">
+        <div>
+          <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span> <span id="event-organizer">คณะเทคโนโลยีสารสนเทศ · มจธ.</span></p>
+          <h1 id="hero-title">ICT Challenge 2026</h1>
+          <p class="hero-copy" id="event-full-title">การแข่งขันตอบปัญหาวิชาการคอมพิวเตอร์และเทคโนโลยีสารสนเทศระดับมัธยมศึกษาตอนปลาย</p>
+          <div class="event-facts">
+            <div><span>วันแข่งขัน</span><strong id="event-date">วันจันทร์ที่ 16 พฤศจิกายน 2569</strong></div>
+            <div><span>สถานที่</span><strong id="event-venue">อาคาร LX · มจธ.</strong></div>
+          </div>
+          <p class="application-dates"><span>ช่วงรับสมัคร</span><strong id="registration-window">5–30 ตุลาคม 2569</strong><span>ช่วงสอบออนไลน์</span><strong id="online-test-window">8–30 ตุลาคม 2569</strong></p>
+          <a class="primary-link" id="official-site-link" href="https://ict.sit.kmutt.ac.th" target="_blank" rel="noopener noreferrer">เว็บไซต์ ICT Challenge
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+        <aside class="route-note" aria-label="ภาพรวมการแข่งขัน">
+          <div class="note-label">ภาพรวมผู้เข้าแข่งขัน</div>
+          <h2>หนึ่งทีมมีสมาชิก 3 คน</h2>
+          <ul class="check-list">
+            <li><span class="checkmark" aria-hidden="true">✓</span><span>นักเรียน ม.4–ม.6 หรือเทียบเท่า</span></li>
+            <li><span class="checkmark" aria-hidden="true">✓</span><span>สมาชิกและอาจารย์ที่ปรึกษามาจากโรงเรียนเดียวกัน</span></li>
+            <li><span class="checkmark" aria-hidden="true">✓</span><span>เส้นทางแข่งขัน: 70 ทีม → 30 ทีม → 8 ทีมชิงชนะเลิศ</span></li>
+          </ul>
+        </aside>
+      </section>
+
+      <section class="eligibility-section" id="eligibility" aria-labelledby="eligibility-title">
+        <div class="wrap eligibility-inner">
+          <div class="section-head">
+            <div class="section-intro">
+              <p class="section-kicker">เริ่มจากการจัดทีม</p>
+              <h2 class="section-title" id="eligibility-title">คุณสมบัติและการสมัคร</h2>
+              <p class="section-description">ตรวจสอบระดับการศึกษา สมาชิกทีม และอาจารย์ที่ปรึกษาก่อนลงทะเบียน</p>
+            </div>
+            <a class="text-link" id="apply-link" href="https://ict.sit.kmutt.ac.th" target="_blank" rel="noopener noreferrer">ดูระบบสมัครและประกาศ <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="eligibility-layout">
+            <div class="requirement-list" id="requirement-list"></div>
+            <aside class="selection-box" aria-labelledby="selection-title">
+              <h3 id="selection-title">เงื่อนไขการคัดเลือก</h3>
+              <ul id="selection-list"></ul>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="knowledge-section" id="topics" aria-labelledby="topics-title">
+        <div class="wrap knowledge-inner">
+          <div class="knowledge-heading">
+            <div>
+              <p class="knowledge-kicker">ขอบเขตเนื้อหาการแข่งขัน</p>
+              <h2 class="knowledge-title" id="topics-title">ข้อสอบครอบคลุม<br>4 กลุ่มความรู้ด้าน ICT</h2>
+            </div>
+            <p class="knowledge-lede">เตรียมตัวได้ตรงจุดด้วยภาพรวมเนื้อหาที่ใช้วัดความรู้ ทั้งพื้นฐานเทคโนโลยี การเขียนโปรแกรม ข้อมูล และการประยุกต์ใช้ดิจิทัล</p>
+          </div>
+          <ol class="topic-grid" id="topic-list" aria-label="กลุ่มความรู้ที่ใช้ในการแข่งขัน"></ol>
+        </div>
+      </section>
+
+      <section class="rounds-section" id="rounds" aria-labelledby="rounds-title">
+        <div class="wrap rounds-inner">
+          <div class="section-head">
+            <div class="section-intro">
+              <p class="section-kicker">จากแบบทดสอบออนไลน์สู่รอบชิง</p>
+              <h2 class="section-title" id="rounds-title">เส้นทางการแข่งขัน</h2>
+              <p class="section-description">คะแนนรวมของสมาชิกทั้ง 3 คนเป็นส่วนสำคัญในการคัดเลือกทีม</p>
+            </div>
+          </div>
+          <ol class="round-list" id="round-list"></ol>
+          <p class="rule-note" id="rule-note"></p>
+        </div>
+      </section>
+
+      <section class="schedule-section" id="schedule" aria-labelledby="schedule-title">
+        <div class="wrap schedule-inner">
+          <div class="schedule-heading">
+            <div>
+              <p class="section-kicker">วันแข่งขันที่ มจธ.</p>
+              <h2 class="section-title" id="schedule-title">กำหนดการ</h2>
+            </div>
+            <div class="schedule-location">
+              <strong id="schedule-date">วันจันทร์ที่ 16 พฤศจิกายน 2569</strong>
+              <span id="schedule-venue">อาคารการเรียนรู้พหุวิทยาการ (LX)</span>
+            </div>
+          </div>
+          <h3 class="important-dates-title">วันสำคัญ</h3>
+          <ol class="important-date-list" id="important-date-list"></ol>
+          <h3 class="day-schedule-title">กำหนดการในวันแข่งขัน</h3>
+          <ol class="schedule-list" id="schedule-list"></ol>
+          <p class="schedule-note">กำหนดการอาจเปลี่ยนแปลงตามความเหมาะสม ผู้จัดจะแจ้งให้ทราบล่วงหน้า</p>
+        </div>
+      </section>
+
+      <section class="awards-section" id="awards" aria-labelledby="awards-title">
+        <div class="wrap awards-inner">
+          <div class="section-head">
+            <div class="section-intro">
+              <p class="section-kicker">รางวัลสำหรับทีมที่ร่วมแข่งขัน</p>
+              <h2 class="section-title" id="awards-title">รางวัลและเกียรติบัตร</h2>
+              <p class="section-description">ทุนการศึกษาและรางวัลสำหรับทีมที่ทำคะแนนได้ตามเกณฑ์</p>
+            </div>
+          </div>
+          <div class="award-grid" id="award-list"></div>
+          <ul class="award-notes" id="award-notes"></ul>
+        </div>
+      </section>
+
+      <section class="faq-section" id="faqs" aria-labelledby="faq-title">
+        <div class="wrap section-inner">
+          <div class="section-head">
+            <div class="section-intro">
+              <p class="section-kicker">ข้อมูลเพิ่มเติม</p>
+              <h2 class="section-title" id="faq-title">คำถามที่พบบ่อย</h2>
+              <p class="section-description">ค้นหาคำตอบหรือเลือกดูตามหัวข้อที่ต้องการ</p>
+            </div>
+            <p class="question-total"><strong id="total-count">16</strong> คำถาม</p>
+          </div>
+
+          <div class="controls">
+            <div class="filters" id="filters" role="group" aria-label="กรองตามหมวดคำถาม"></div>
+            <label class="search-box">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.6" stroke="currentColor" stroke-width="1.7"/><path d="m16 16 4.2 4.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+              <input id="search" type="search" placeholder="ค้นหาคำตอบ" autocomplete="off" aria-label="ค้นหาคำถามและคำตอบ">
+            </label>
+          </div>
+
+          <div class="faq-layout">
+            <div class="faq-list" id="faq-list" aria-live="polite"></div>
+            <aside class="contact-box" id="contact" aria-labelledby="contact-title">
+              <h3 id="contact-title">ยังมีคำถามอื่นอีกไหม?</h3>
+              <p class="contact-intro">ติดต่อทีมงานได้โดยตรง หรือเช็กประกาศล่าสุดจากผู้จัดงาน</p>
+              <div class="contact-row"><span>Line@</span><strong>@sit.kmutt</strong></div>
+              <div class="contact-row"><span>Email</span><a href="mailto:event@sit.kmutt.ac.th">event@sit.kmutt.ac.th</a></div>
+              <div class="contact-row"><span>โทรศัพท์</span><a href="tel:+6624709882">+662 470 9882</a></div>
+              <div class="contact-links">
+                <a href="https://ict.sit.kmutt.ac.th/contact" target="_blank" rel="noopener noreferrer">หน้าติดต่อเรา <span aria-hidden="true">↗</span></a>
+                <a href="https://ict.sit.kmutt.ac.th/announcements" target="_blank" rel="noopener noreferrer">ประกาศล่าสุด <span aria-hidden="true">↗</span></a>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <p>คู่มือผู้เข้าแข่งขัน ICT Challenge 2026 · <span id="footer-organizer">คณะเทคโนโลยีสารสนเทศ มจธ.</span></p>
+        <p><a href="https://ict.sit.kmutt.ac.th/announcements" target="_blank" rel="noopener noreferrer">ดูประกาศจากผู้จัดงาน</a></p>
+      </div>
+    </footer>
+
+    <script>
+      const filterRoot = document.getElementById("filters");
+      const listRoot = document.getElementById("faq-list");
+      const topicRoot = document.getElementById("topic-list");
+      const requirementRoot = document.getElementById("requirement-list");
+      const selectionRoot = document.getElementById("selection-list");
+      const roundRoot = document.getElementById("round-list");
+      const importantDateRoot = document.getElementById("important-date-list");
+      const scheduleRoot = document.getElementById("schedule-list");
+      const awardRoot = document.getElementById("award-list");
+      const awardNotesRoot = document.getElementById("award-notes");
+      const searchInput = document.getElementById("search");
+      const totalCount = document.getElementById("total-count");
+      let questions = [];
+      let topics = [];
+      let activeCategory = "ทั้งหมด";
+
+      function setText(id, value) {
+        const element = document.getElementById(id);
+        if (element) element.textContent = value;
+      }
+
+      function drawEvent(data) {
+        const event = data.event;
+        document.title = event.title + " | คู่มือผู้เข้าแข่งขัน";
+        setText("event-organizer", event.organizerShort);
+        setText("footer-organizer", event.organizer);
+        setText("hero-title", event.title);
+        setText("event-full-title", event.fullTitle);
+        setText("event-date", event.date);
+        setText("event-venue", event.venue);
+        setText("registration-window", data.application.registrationWindow);
+        setText("online-test-window", data.application.onlineTestWindow);
+        setText("schedule-date", event.date);
+        setText("schedule-venue", event.venue);
+        setText("rule-note", data.roundsNote);
+        document.getElementById("official-site-link").href = event.officialUrl;
+        document.getElementById("apply-link").href = event.officialUrl;
+
+        requirementRoot.replaceChildren();
+        data.eligibility.requirements.forEach(function (requirement) {
+          const row = document.createElement("article");
+          row.className = "requirement-item";
+          const heading = document.createElement("h3");
+          heading.textContent = requirement.title;
+          const description = document.createElement("p");
+          description.textContent = requirement.description;
+          row.append(heading, description);
+          requirementRoot.appendChild(row);
+        });
+
+        selectionRoot.replaceChildren();
+        data.eligibility.selectionRules.forEach(function (rule) {
+          const item = document.createElement("li");
+          item.textContent = rule;
+          selectionRoot.appendChild(item);
+        });
+
+        importantDateRoot.replaceChildren();
+        data.importantDates.forEach(function (entry) {
+          const item = document.createElement("li");
+          item.className = "important-date";
+          const date = document.createElement("time");
+          date.textContent = entry.date;
+          const activity = document.createElement("span");
+          activity.textContent = entry.activity;
+          item.append(date, activity);
+          importantDateRoot.appendChild(item);
+        });
+
+        roundRoot.replaceChildren();
+        data.rounds.forEach(function (round) {
+          const item = document.createElement("li");
+          item.className = "round-item";
+          const number = document.createElement("span");
+          number.className = "round-number";
+          number.textContent = round.number;
+          const content = document.createElement("div");
+          const when = document.createElement("span");
+          when.className = "round-when";
+          when.textContent = round.when;
+          const title = document.createElement("h3");
+          title.textContent = round.title;
+          const description = document.createElement("p");
+          description.textContent = round.description;
+          content.append(when, title, description);
+          item.append(number, content);
+          roundRoot.appendChild(item);
+        });
+
+        scheduleRoot.replaceChildren();
+        data.schedule.forEach(function (entry) {
+          const item = document.createElement("li");
+          item.className = "schedule-item";
+          const time = document.createElement("span");
+          time.className = "schedule-time";
+          time.textContent = entry.time;
+          const activity = document.createElement("span");
+          activity.className = "schedule-activity";
+          activity.textContent = entry.activity;
+          const place = document.createElement("span");
+          place.className = "schedule-place";
+          place.textContent = entry.location;
+          item.append(time, activity, place);
+          scheduleRoot.appendChild(item);
+        });
+
+        awardRoot.replaceChildren();
+        data.awards.forEach(function (award) {
+          const card = document.createElement("article");
+          card.className = "award-card";
+          const title = document.createElement("h3");
+          title.textContent = award.title;
+          const amount = document.createElement("p");
+          amount.className = "award-amount";
+          amount.textContent = award.amount;
+          const description = document.createElement("p");
+          description.textContent = award.description;
+          card.append(title, amount, description);
+          awardRoot.appendChild(card);
+        });
+
+        awardNotesRoot.replaceChildren();
+        data.notes.forEach(function (note) {
+          const item = document.createElement("li");
+          item.textContent = note;
+          awardNotesRoot.appendChild(item);
+        });
+      }
+
+      function drawTopics() {
+        topicRoot.replaceChildren();
+        topics.forEach(function (topic) {
+          const item = document.createElement("li");
+          item.className = "topic-card";
+          const number = document.createElement("span");
+          number.className = "topic-number";
+          number.textContent = topic.number;
+          const content = document.createElement("div");
+          const title = document.createElement("h3");
+          title.textContent = topic.title;
+          const description = document.createElement("p");
+          description.textContent = topic.description;
+          const tags = document.createElement("div");
+          tags.className = "topic-tags";
+          tags.setAttribute("aria-label", "หัวข้อสำคัญ");
+          topic.tags.forEach(function (label) {
+            const tag = document.createElement("span");
+            tag.textContent = label;
+            tags.appendChild(tag);
+          });
+          content.append(title, description, tags);
+          item.append(number, content);
+          topicRoot.appendChild(item);
+        });
+      }
+
+      function makeFilter(label, selected) {
+        const button = document.createElement("button");
+        button.className = "filter-button";
+        button.type = "button";
+        button.textContent = label;
+        button.setAttribute("aria-pressed", String(selected));
+        button.addEventListener("click", function () {
+          activeCategory = label;
+          drawFilters();
+          drawQuestions();
+        });
+        return button;
+      }
+
+      function drawFilters() {
+        filterRoot.replaceChildren();
+        const categories = ["ทั้งหมด"].concat(Array.from(new Set(questions.map(function (item) { return item.category; }))));
+        categories.forEach(function (category) {
+          filterRoot.appendChild(makeFilter(category, activeCategory === category));
+        });
+      }
+
+      function drawQuestions() {
+        const query = searchInput.value.trim().toLocaleLowerCase("th");
+        const filtered = questions.filter(function (item) {
+          const categoryMatches = activeCategory === "ทั้งหมด" || item.category === activeCategory;
+          const searchable = (item.question + " " + item.answer + " " + item.category).toLocaleLowerCase("th");
+          return categoryMatches && (!query || searchable.includes(query));
+        });
+        listRoot.replaceChildren();
+        totalCount.textContent = String(filtered.length);
+
+        if (!filtered.length) {
+          const empty = document.createElement("div");
+          empty.className = "empty-state";
+          const heading = document.createElement("strong");
+          heading.textContent = "ยังไม่พบคำตอบนี้";
+          const message = document.createElement("span");
+          message.textContent = "ลองใช้คำค้นอื่น หรือเลือกดูทุกหมวด";
+          const clear = document.createElement("button");
+          clear.className = "clear-search";
+          clear.type = "button";
+          clear.textContent = "ล้างตัวกรอง";
+          clear.addEventListener("click", function () {
+            activeCategory = "ทั้งหมด";
+            searchInput.value = "";
+            drawFilters();
+            drawQuestions();
+            searchInput.focus();
+          });
+          empty.append(heading, message, document.createElement("br"), clear);
+          listRoot.appendChild(empty);
+          return;
+        }
+
+        const groups = Array.from(new Set(filtered.map(function (item) { return item.category; })));
+        groups.forEach(function (category) {
+          const section = document.createElement("section");
+          section.className = "faq-group";
+          const heading = document.createElement("h3");
+          heading.className = "group-heading";
+          heading.textContent = category;
+          section.appendChild(heading);
+
+          filtered.filter(function (item) { return item.category === category; }).forEach(function (item) {
+            const details = document.createElement("details");
+            details.className = "faq-item";
+            const summary = document.createElement("summary");
+            const question = document.createElement("span");
+            question.className = "question-text";
+            question.textContent = item.question;
+            const icon = document.createElement("span");
+            icon.className = "expand-icon";
+            icon.setAttribute("aria-hidden", "true");
+            summary.append(question, icon);
+            const answer = document.createElement("div");
+            answer.className = "answer";
+            const paragraph = document.createElement("p");
+            paragraph.textContent = item.answer;
+            answer.appendChild(paragraph);
+            details.append(summary, answer);
+            section.appendChild(details);
+          });
+          listRoot.appendChild(section);
+        });
+      }
+
+      searchInput.addEventListener("input", drawQuestions);
+      Promise.all([fetch("./event.json"), fetch("./faq.json"), fetch("./topics.json")])
+        .then(function (responses) {
+          if (responses.some(function (response) { return !response.ok; })) throw new Error("Page data could not be loaded");
+          return Promise.all(responses.map(function (response) { return response.json(); }));
+        })
+        .then(function (data) {
+          drawEvent(data[0]);
+          questions = data[1];
+          topics = data[2];
+          totalCount.textContent = String(questions.length);
+          drawTopics();
+          drawFilters();
+          drawQuestions();
+        })
+        .catch(function () {
+          topicRoot.textContent = "เนื้อหายังโหลดไม่สำเร็จ กรุณาลองเปิดหน้านี้อีกครั้ง";
+          listRoot.textContent = "คำถามยังโหลดไม่สำเร็จ กรุณาลองเปิดหน้านี้อีกครั้ง";
+        });
+    </script>
+  </body>
+</html>
