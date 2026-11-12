@@ -155,7 +155,9 @@
       .practice-item[open] .practice-toggle::after { transform: translate(-50%,-50%); }
       .practice-content { padding: 0 16px 17px; }
       .practice-choices { display: grid; gap: 5px; margin: 0 0 13px; padding-left: 22px; color: #5b6c67; font-size: 12px; line-height: 1.7; }
+      .practice-solution > summary { padding: 9px 0 0; color: var(--teal); cursor: pointer; font-size: 12px; font-weight: 600; }
       .practice-answer { padding: 13px 15px; border-left: 2px solid #7e9c62; background: #f1f5ef; }
+      .practice-solution .practice-answer { margin-top: 9px; }
       .practice-answer strong { display: block; margin-bottom: 4px; color: var(--forest); font-size: 13px; }
       .practice-answer p { margin: 0; color: #5d6d68; font-size: 12px; line-height: 1.8; white-space: pre-wrap; }
       .practice-note { margin: 19px 0 0; color: #687975; font-size: 11px; line-height: 1.8; }
@@ -414,7 +416,7 @@
             <div class="section-intro">
               <p class="section-kicker">คลังโจทย์จากชุดเอกสาร</p>
               <h2 class="section-title" id="practice-title">โจทย์ฝึกทำพร้อมเฉลย</h2>
-              <p class="section-description">เลือกหมวดหรือค้นคำ แล้วเปิดโจทย์เพื่อดูคำตอบและวิธีคิด</p>
+              <p class="section-description">เลือกหมวดหรือค้นคำ เปิดโจทย์เพื่อดูตัวเลือก แล้วกดดูเฉลยและวิธีคิด</p>
             </div>
             <p class="question-total"><strong id="practice-total">0</strong> ข้อ</p>
           </div>
@@ -847,6 +849,10 @@
               });
               content.appendChild(choices);
             }
+            const solution = document.createElement("details");
+            solution.className = "practice-solution";
+            const solutionSummary = document.createElement("summary");
+            solutionSummary.textContent = "ดูเฉลยและวิธีคิด";
             const answer = document.createElement("div");
             answer.className = "practice-answer";
             const answerHeading = document.createElement("strong");
@@ -854,7 +860,8 @@
             const explanation = document.createElement("p");
             explanation.textContent = item.explanation;
             answer.append(answerHeading, explanation);
-            content.appendChild(answer);
+            solution.append(solutionSummary, answer);
+            content.appendChild(solution);
             details.append(summary, content);
             itemsRoot.appendChild(details);
           });
