@@ -128,6 +128,39 @@
       .topic-tags { display: flex; flex-wrap: wrap; gap: 6px; }
       .topic-tags span { padding: 2px 7px; border: 1px solid rgba(217,238,131,.32); color: #e0ebdf; font-size: 10px; line-height: 1.8; }
 
+      .practice-section { background: #e9efea; border-top: 1px solid #dce5dd; }
+      .practice-inner { padding: 66px 0 73px; }
+      .practice-controls { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px 28px; margin: 0 0 28px; padding: 16px 0; border-top: 1px solid #cfdad2; border-bottom: 1px solid #cfdad2; }
+      .practice-filters { display: flex; flex-wrap: wrap; gap: 6px 19px; }
+      .practice-filter { position: relative; padding: 3px 0; border: 0; background: transparent; color: #667578; cursor: pointer; font-size: 12px; }
+      .practice-filter:hover, .practice-filter[aria-pressed="true"] { color: var(--forest); }
+      .practice-filter[aria-pressed="true"] { font-weight: 700; }
+      .practice-filter[aria-pressed="true"]::after { position: absolute; right: 0; bottom: -5px; left: 0; height: 2px; background: #6c9d53; content: ""; }
+      .practice-search { display: flex; align-items: center; gap: 10px; width: min(310px, 100%); }
+      .practice-search svg { width: 18px; height: 18px; flex: 0 0 auto; color: #738381; }
+      .practice-search input { width: 100%; min-width: 0; padding: 8px 0; border: 0; border-bottom: 1px solid #b9c9bf; border-radius: 0; outline-offset: 3px; color: var(--ink); background: transparent; font-size: 13px; }
+      .practice-search input::placeholder { color: #84928d; }
+      .practice-list { display: grid; gap: 29px; }
+      .practice-group h3 { margin: 0 0 10px; padding-bottom: 9px; border-bottom: 1px solid #cbd8cf; color: #526e66; font-size: 13px; font-weight: 600; }
+      .practice-items { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); align-items: start; gap: 10px; }
+      .practice-item { min-width: 0; border: 1px solid #d4dfd7; border-left: 3px solid #8eaf78; background: white; }
+      .practice-item[open] { grid-column: 1 / -1; }
+      .practice-item summary { display: grid; grid-template-columns: minmax(0,1fr) 24px; align-items: center; gap: 16px; padding: 15px 16px; color: var(--ink); cursor: pointer; list-style: none; }
+      .practice-item summary::-webkit-details-marker { display: none; }
+      .practice-question { display: block; white-space: pre-wrap; font-size: 13px; font-weight: 600; line-height: 1.7; }
+      .practice-source { display: block; margin-top: 6px; color: #7a8983; font-size: 10px; font-weight: 400; }
+      .practice-toggle { position: relative; width: 23px; height: 23px; border: 1px solid #cfdbd2; border-radius: 50%; }
+      .practice-toggle::before, .practice-toggle::after { position: absolute; top: 50%; left: 50%; width: 8px; height: 1px; background: var(--teal); content: ""; transform: translate(-50%,-50%); }
+      .practice-toggle::after { transform: translate(-50%,-50%) rotate(90deg); }
+      .practice-item[open] .practice-toggle::after { transform: translate(-50%,-50%); }
+      .practice-content { padding: 0 16px 17px; }
+      .practice-choices { display: grid; gap: 5px; margin: 0 0 13px; padding-left: 22px; color: #5b6c67; font-size: 12px; line-height: 1.7; }
+      .practice-answer { padding: 13px 15px; border-left: 2px solid #7e9c62; background: #f1f5ef; }
+      .practice-answer strong { display: block; margin-bottom: 4px; color: var(--forest); font-size: 13px; }
+      .practice-answer p { margin: 0; color: #5d6d68; font-size: 12px; line-height: 1.8; white-space: pre-wrap; }
+      .practice-note { margin: 19px 0 0; color: #687975; font-size: 11px; line-height: 1.8; }
+      .practice-empty { padding: 24px 0; color: #63736e; font-size: 13px; }
+
       .rounds-section { background: var(--white); border-top: 1px solid #e6ebe6; }
       .rounds-inner { padding: 66px 0 70px; }
       .round-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0 54px; margin: 0; padding: 0; list-style: none; }
@@ -258,6 +291,15 @@
         .topic-grid { grid-template-columns: 1fr; gap: 0; }
         .topic-card { gap: 12px; padding: 19px 0; }
         .topic-card h3 { font-size: 15px; }
+        .practice-inner { padding: 49px 0 56px; }
+        .practice-controls { align-items: stretch; gap: 16px; }
+        .practice-filters { flex-wrap: nowrap; overflow-x: auto; margin-right: -18px; padding: 0 18px 5px 0; scrollbar-width: thin; }
+        .practice-filter { flex: 0 0 auto; }
+        .practice-search { width: 100%; }
+        .practice-items { grid-template-columns: 1fr; gap: 8px; }
+        .practice-item[open] { grid-column: auto; }
+        .practice-item summary { padding: 14px 13px; }
+        .practice-content { padding: 0 13px 14px; }
         .round-list { grid-template-columns: 1fr; gap: 0; }
         .schedule-heading { align-items: start; flex-direction: column; gap: 9px; }
         .schedule-location { text-align: left; }
@@ -296,9 +338,9 @@
         <nav class="header-nav" aria-label="เมนูหลัก">
           <a href="#eligibility">คุณสมบัติ</a>
           <a href="#topics">ขอบเขตข้อสอบ</a>
+          <a href="#practice">โจทย์ฝึกทำ</a>
           <a href="#rounds">รอบแข่งขัน</a>
           <a href="#schedule">กำหนดการ</a>
-          <a href="#awards">รางวัล</a>
           <a href="#contact">ติดต่อทีมงาน</a>
         </nav>
         <a class="header-cta" href="#contact">สอบถามทีมงาน
@@ -363,6 +405,28 @@
             <p class="knowledge-lede">เตรียมตัวได้ตรงจุดด้วยภาพรวมเนื้อหาที่ใช้วัดความรู้ ทั้งพื้นฐานเทคโนโลยี การเขียนโปรแกรม ข้อมูล และการประยุกต์ใช้ดิจิทัล</p>
           </div>
           <ol class="topic-grid" id="topic-list" aria-label="กลุ่มความรู้ที่ใช้ในการแข่งขัน"></ol>
+        </div>
+      </section>
+
+      <section class="practice-section" id="practice" aria-labelledby="practice-title">
+        <div class="wrap practice-inner">
+          <div class="section-head">
+            <div class="section-intro">
+              <p class="section-kicker">คลังโจทย์จากชุดเอกสาร</p>
+              <h2 class="section-title" id="practice-title">โจทย์ฝึกทำพร้อมเฉลย</h2>
+              <p class="section-description">เลือกหมวดหรือค้นคำ แล้วเปิดโจทย์เพื่อดูคำตอบและวิธีคิด</p>
+            </div>
+            <p class="question-total"><strong id="practice-total">0</strong> ข้อ</p>
+          </div>
+          <div class="practice-controls">
+            <div class="practice-filters" id="practice-filters" role="group" aria-label="กรองโจทย์ตามหมวด"></div>
+            <label class="practice-search">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.6" stroke="currentColor" stroke-width="1.7"/><path d="m16 16 4.2 4.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+              <input id="practice-search" type="search" placeholder="ค้นหาโจทย์หรือคำตอบ" autocomplete="off" aria-label="ค้นหาโจทย์ฝึกทำ">
+            </label>
+          </div>
+          <div class="practice-list" id="practice-list" aria-live="polite"></div>
+          <p class="practice-note">โจทย์ถอดความจากภาพในชุดเอกสารที่ได้รับ บางข้อมีการเรียบเรียงใหม่เพื่อให้อ่านง่าย และมีการเติมคำอธิบายประกอบเมื่อภาพไม่มีเฉลย คำตอบของข้อที่ตัวเลือกในภาพไม่สอดคล้องกับขั้นตอนคำนวณจะระบุหมายเหตุไว้</p>
         </div>
       </section>
 
@@ -471,9 +535,15 @@
       const awardNotesRoot = document.getElementById("award-notes");
       const searchInput = document.getElementById("search");
       const totalCount = document.getElementById("total-count");
+      const practiceFilterRoot = document.getElementById("practice-filters");
+      const practiceListRoot = document.getElementById("practice-list");
+      const practiceSearchInput = document.getElementById("practice-search");
+      const practiceTotalCount = document.getElementById("practice-total");
       let questions = [];
       let topics = [];
+      let practiceQuestions = [];
       let activeCategory = "ทั้งหมด";
+      let activePracticeCategory = "ทั้งหมด";
 
       function setText(id, value) {
         const element = document.getElementById(id);
@@ -702,8 +772,101 @@
         });
       }
 
+      function drawPracticeFilters() {
+        practiceFilterRoot.replaceChildren();
+        const categories = ["ทั้งหมด"].concat(Array.from(new Set(practiceQuestions.map(function (item) { return item.category; }))));
+        categories.forEach(function (category) {
+          const button = document.createElement("button");
+          button.className = "practice-filter";
+          button.type = "button";
+          button.textContent = category;
+          button.setAttribute("aria-pressed", String(activePracticeCategory === category));
+          button.addEventListener("click", function () {
+            activePracticeCategory = category;
+            drawPracticeFilters();
+            drawPractice();
+          });
+          practiceFilterRoot.appendChild(button);
+        });
+      }
+
+      function drawPractice() {
+        const query = practiceSearchInput.value.trim().toLocaleLowerCase("th");
+        const filtered = practiceQuestions.filter(function (item) {
+          const categoryMatches = activePracticeCategory === "ทั้งหมด" || item.category === activePracticeCategory;
+          const searchable = [item.question, item.answer, item.explanation, item.category, item.source]
+            .concat(item.choices || []).join(" ").toLocaleLowerCase("th");
+          return categoryMatches && (!query || searchable.includes(query));
+        });
+        practiceTotalCount.textContent = String(filtered.length);
+        practiceListRoot.replaceChildren();
+
+        if (!filtered.length) {
+          const empty = document.createElement("p");
+          empty.className = "practice-empty";
+          empty.textContent = "ยังไม่พบโจทย์ที่ตรงกับคำค้น ลองเปลี่ยนคำหรือเลือกหมวดอื่น";
+          practiceListRoot.appendChild(empty);
+          return;
+        }
+
+        const groups = Array.from(new Set(filtered.map(function (item) { return item.category; })));
+        groups.forEach(function (category) {
+          const section = document.createElement("section");
+          section.className = "practice-group";
+          const heading = document.createElement("h3");
+          heading.textContent = category;
+          const itemsRoot = document.createElement("div");
+          itemsRoot.className = "practice-items";
+
+          filtered.filter(function (item) { return item.category === category; }).forEach(function (item) {
+            const details = document.createElement("details");
+            details.className = "practice-item";
+            const summary = document.createElement("summary");
+            const summaryCopy = document.createElement("span");
+            const question = document.createElement("span");
+            question.className = "practice-question";
+            question.textContent = item.question;
+            const source = document.createElement("span");
+            source.className = "practice-source";
+            source.textContent = item.source;
+            summaryCopy.append(question, source);
+            const toggle = document.createElement("span");
+            toggle.className = "practice-toggle";
+            toggle.setAttribute("aria-hidden", "true");
+            summary.append(summaryCopy, toggle);
+
+            const content = document.createElement("div");
+            content.className = "practice-content";
+            if (item.choices && item.choices.length) {
+              const choices = document.createElement("ol");
+              choices.className = "practice-choices";
+              item.choices.forEach(function (choice) {
+                const option = document.createElement("li");
+                option.textContent = choice;
+                choices.appendChild(option);
+              });
+              content.appendChild(choices);
+            }
+            const answer = document.createElement("div");
+            answer.className = "practice-answer";
+            const answerHeading = document.createElement("strong");
+            answerHeading.textContent = "เฉลย: " + item.answer;
+            const explanation = document.createElement("p");
+            explanation.textContent = item.explanation;
+            answer.append(answerHeading, explanation);
+            content.appendChild(answer);
+            details.append(summary, content);
+            itemsRoot.appendChild(details);
+          });
+
+          section.append(heading, itemsRoot);
+          practiceListRoot.appendChild(section);
+        });
+      }
+
       searchInput.addEventListener("input", drawQuestions);
-      Promise.all([fetch("./event.json"), fetch("./faq.json"), fetch("./topics.json")])
+      practiceSearchInput.addEventListener("input", drawPractice);
+      Promise.all([fetch("./event.json"), fetch("./faq.json"), fetch("./topics.json"), fetch("./practice.json")])
         .then(function (responses) {
           if (responses.some(function (response) { return !response.ok; })) throw new Error("Page data could not be loaded");
           return Promise.all(responses.map(function (response) { return response.json(); }));
@@ -712,14 +875,19 @@
           drawEvent(data[0]);
           questions = data[1];
           topics = data[2];
+          practiceQuestions = data[3];
           totalCount.textContent = String(questions.length);
+          practiceTotalCount.textContent = String(practiceQuestions.length);
           drawTopics();
           drawFilters();
           drawQuestions();
+          drawPracticeFilters();
+          drawPractice();
         })
         .catch(function () {
           topicRoot.textContent = "เนื้อหายังโหลดไม่สำเร็จ กรุณาลองเปิดหน้านี้อีกครั้ง";
           listRoot.textContent = "คำถามยังโหลดไม่สำเร็จ กรุณาลองเปิดหน้านี้อีกครั้ง";
+          practiceListRoot.textContent = "โจทย์ฝึกทำยังโหลดไม่สำเร็จ กรุณาลองเปิดหน้านี้อีกครั้ง";
         });
     </script>
   </body>
