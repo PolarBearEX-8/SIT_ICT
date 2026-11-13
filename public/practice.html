@@ -99,6 +99,7 @@
       .progress-meta > span, .progress-track { display: none; }
       .question-card { min-height: 55vh; padding: 20px 15px; border: 0; border-radius: 0; box-shadow: none; }
       .question-topline, .question-source { display: none; }
+      .question-source.is-pretest { display: block; margin: 0 0 10px; color: #637d8d; font-size: 12px; }
       .question-text { color: #405563; font-size: 21px; font-weight: 600; line-height: 1.65; }
       .response-hint { margin: 10px 0 4px; color: #87949c; font-size: 11px; }
       .choices { gap: 8px; }
@@ -182,7 +183,8 @@
             { id: "utcc-selection", label: "UTCC · ชุดคัดเลือก ปี 2568", questions: allQuestions.map(function (item, index) { return { item: item, index: index }; }).filter(function (entry) { return entry.item.source === "UTCC, ชุดคัดเลือก ปี 2568"; }) },
             { id: "utcc-knowledge", label: "UTCC · ชุดความรู้", questions: allQuestions.map(function (item, index) { return { item: item, index: index }; }).filter(function (entry) { return entry.item.source === "UTCC, ชุดความรู้"; }) },
             { id: "utcc-final", label: "UTCC · รอบ 10 ทีม ปี 2568", questions: allQuestions.map(function (item, index) { return { item: item, index: index }; }).filter(function (entry) { return sourceGroup(entry.item.source) === "UTCC, รอบ 10 ทีม ปี 2568"; }) },
-            { id: "ict-2026", label: "ICT Challenge 2026 · แบบทดสอบออนไลน์", questions: ict }
+            { id: "ict-2026", label: "ICT Challenge 2026 · แบบทดสอบออนไลน์", questions: ict },
+            { id: "pretest", label: "Pre-test · โจทย์แต่งใหม่ตามขอบเขตความรู้", questions: allQuestions.map(function (item, index) { return { item: item, index: index }; }).filter(function (entry) { return entry.item.source === "Pre-test แต่งใหม่ตามขอบเขตความรู้"; }) }
           ];
           return sets;
         }
@@ -232,6 +234,10 @@
           topline.className = "question-topline";
           topline.append(textNode("span", "question-number", "ข้อที่ " + String(questionIndex + 1).padStart(2, "0")), textNode("span", "question-category", item.category || "คอมพิวเตอร์และเทคโนโลยีสารสนเทศ"));
           const source = textNode("p", "question-source", "แหล่งข้อสอบ · " + item.source);
+          if (item.source === "Pre-test แต่งใหม่ตามขอบเขตความรู้") {
+            source.classList.add("is-pretest");
+            source.textContent = "Pre-test · โจทย์แต่งใหม่เพื่อฝึกตามขอบเขตความรู้ ไม่ใช่ข้อสอบจริง";
+          }
           const question = textNode("h2", "question-text", item.question);
           card.append(topline, source, question);
 
@@ -317,10 +323,11 @@
           renderQuestion();
         }
 
-        fetch("./practice.json")
-          .then(function (response) { if (!response.ok) throw new Error("Question data unavailable"); return response.json(); })
+        Promise.all(["./practice.json", "./pretest.json"].map(function (url) {
+          return fetch(url).then(function (response) { if (!response.ok) throw new Error("Question data unavailable"); return response.json(); });
+        }))
           .then(function (data) {
-            allQuestions = data;
+            allQuestions = data[0].concat(data[1]);
             sets = makeSets();
             examSelect.replaceChildren();
             sets.forEach(function (set) {
@@ -330,9 +337,10 @@
               examSelect.appendChild(option);
             });
             examSelect.disabled = false;
-            examSelect.value = "utcc-all";
+            const requestedSet = new URLSearchParams(window.location.search).get("set");
+            examSelect.value = sets.some(function (set) { return set.id === requestedSet; }) ? requestedSet : "utcc-all";
             examSelect.addEventListener("change", function () { activateSet(examSelect.value); });
-            activateSet("utcc-all");
+            activateSet(examSelect.value);
           })
           .catch(function () { quizRoot.innerHTML = '<div class="load-error">โหลดโจทย์ไม่สำเร็จ กรุณารีเฟรชหน้าเว็บอีกครั้ง</div>'; });
       }());
