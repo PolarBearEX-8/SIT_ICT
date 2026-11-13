@@ -77,6 +77,49 @@
         .nav-status { max-width: 90px; line-height: 1.5; }
       }
       @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+      /* Exam layout follows the ICT preliminary exam screen. */
+      body { background: #fff; color: #405563; }
+      .topbar { min-height: 40px; padding: 4px 24px; background: #fff; color: #526978; border-bottom: 1px solid #eee; }
+      .brand-mark, .brand-text small { display: none; }
+      .brand-text strong, .back-link { color: #526978; font-size: 12px; }
+      .back-link:hover { color: #2d8ec6; }
+      main { width: calc(100% - 16px); max-width: none; min-height: calc(100vh - 48px); padding: 8px 14px 16px; border: 1px solid #e2e2e2; }
+      .page-heading { justify-content: flex-end; margin: 0 0 8px; }
+      .page-heading > div { display: none; }
+      .set-picker { display: flex; flex: 0 1 420px; align-items: center; gap: 8px; }
+      .set-picker span { flex: none; font-size: 12px; }
+      .set-picker select { height: 34px; font-size: 12px; }
+      .progress-area { min-height: 96px; margin: 0; padding: 16px 14px; background: #60a4d8; color: white; }
+      .progress-area::before { content: 'ICT Challenge 2026 ข้อสอบฝึกทำ'; display: block; margin-bottom: 4px; color: white; font-size: 20px; font-weight: 700; }
+      .progress-meta { margin: 0; color: white; }
+      .progress-meta strong { color: white; font-size: 19px; }
+      .progress-meta > span, .progress-track { display: none; }
+      .question-card { min-height: 55vh; padding: 20px 15px; border: 0; border-radius: 0; box-shadow: none; }
+      .question-topline, .question-source { display: none; }
+      .question-text { color: #405563; font-size: 21px; font-weight: 600; line-height: 1.65; }
+      .response-hint { margin: 10px 0 4px; color: #87949c; font-size: 11px; }
+      .choices { gap: 8px; }
+      .choice, .choice:hover, .choice:has(input:checked) { display: flex; align-items: center; gap: 9px; width: fit-content; max-width: 100%; padding: 3px 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+      .choice input { flex: none; width: 24px; height: 24px; margin: 0; accent-color: #54b8ec; }
+      .choice-letter { display: none; }
+      .choice-text { padding: 0; color: #405563; font-size: 20px; line-height: 1.6; }
+      .solution-toggle { margin-top: 22px; font-size: 13px; color: #278fc8; }
+      .question-nav { padding: 0 15px; }
+      .nav-button.primary { border-color: #60a4d8; background: #60a4d8; }
+      .footer-note { padding: 0 15px; }
+      @media (max-width: 640px) {
+        .topbar { min-height: 40px; padding: 4px 12px; }
+        main { width: calc(100% - 10px); padding: 8px; }
+        .page-heading { align-items: stretch; }
+        .set-picker { flex-direction: row; flex-basis: auto; }
+        .progress-area { min-height: 80px; padding: 12px; }
+        .progress-area::before { font-size: 16px; }
+        .progress-meta strong { font-size: 16px; }
+        .question-card { min-height: 50vh; padding: 18px 8px; }
+        .question-text, .choice-text { font-size: 17px; }
+        .choice input { width: 21px; height: 21px; }
+        .question-nav { padding: 0 8px; }
+      }
     </style>
   </head>
   <body>
@@ -171,7 +214,7 @@
           progress.className = "progress-area";
           const meta = document.createElement("div");
           meta.className = "progress-meta";
-          meta.append(textNode("strong", "", "ข้อ " + (questionIndex + 1) + " / " + activeQuestions.length), textNode("span", "", "ความคืบหน้า " + Math.round(percent) + "%"));
+          meta.append(textNode("strong", "", "Question " + (questionIndex + 1) + " / " + activeQuestions.length), textNode("span", "", "ความคืบหน้า " + Math.round(percent) + "%"));
           const track = document.createElement("div");
           track.className = "progress-track";
           const fill = document.createElement("div");
