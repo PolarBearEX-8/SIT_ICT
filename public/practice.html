@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#142b3d">
+    <meta name="description" content="ฝึกทำข้อสอบคอมพิวเตอร์และเทคโนโลยีสารสนเทศทีละข้อ พร้อมตัวเลือกและเฉลย">
+    <title>โจทย์ฝึกทำ | ICT Challenge</title>
+    <style>
+      :root { color-scheme: light; --navy: #142b3d; --ink: #1d3544; --muted: #71818b; --line: #dce5e9; --cyan: #13a7c0; --cyan-dark: #087d94; --paper: #fff; --bg: #eef3f6; --green: #16866f; }
+      * { box-sizing: border-box; }
+      body { min-width: 320px; min-height: 100vh; margin: 0; color: var(--ink); background: var(--bg); font-family: "Noto Sans Thai", "Leelawadee UI", Tahoma, sans-serif; -webkit-font-smoothing: antialiased; }
+      button, select { font: inherit; }
+      .topbar { min-height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 0 max(24px, calc((100vw - 1080px) / 2)); color: white; background: var(--navy); }
+      .brand { display: inline-flex; align-items: center; gap: 12px; color: inherit; text-decoration: none; }
+      .brand-mark { display: grid; width: 38px; height: 38px; place-items: center; border: 1px solid rgba(255,255,255,.28); border-radius: 9px; color: #7fe3ee; font-size: 13px; font-weight: 800; letter-spacing: .03em; }
+      .brand-text { display: grid; gap: 1px; }
+      .brand-text strong { font-size: 13px; letter-spacing: .04em; }
+      .brand-text small { color: #afc1ca; font-size: 10px; }
+      .back-link { color: #c9d8df; font-size: 12px; text-decoration: none; }
+      .back-link:hover { color: white; }
+      main { width: min(850px, calc(100% - 40px)); margin: 0 auto; padding: 31px 0 38px; }
+      .page-heading { display: flex; align-items: end; justify-content: space-between; gap: 22px; margin-bottom: 20px; }
+      .eyebrow { margin: 0 0 5px; color: var(--cyan-dark); font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+      h1 { margin: 0; color: var(--navy); font-size: clamp(21px, 3.3vw, 29px); line-height: 1.35; }
+      .heading-note { margin: 6px 0 0; color: var(--muted); font-size: 12px; }
+      .set-picker { display: grid; flex: 0 0 min(275px, 40%); gap: 5px; }
+      .set-picker span { color: #657783; font-size: 10px; font-weight: 700; }
+      .set-picker select { width: 100%; height: 42px; padding: 0 34px 0 12px; border: 1px solid #ccd9df; border-radius: 5px; outline-color: var(--cyan); color: var(--navy); background-color: white; font-size: 12px; }
+      .progress-area { margin: 0 0 13px; }
+      .progress-meta { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 8px; color: #657783; font-size: 11px; }
+      .progress-meta strong { color: var(--navy); font-size: 12px; }
+      .progress-track { height: 5px; overflow: hidden; border-radius: 9px; background: #dbe5e9; }
+      .progress-fill { width: 0; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--cyan), #40c9bd); transition: width .2s ease; }
+      .question-card { min-height: 455px; padding: clamp(22px, 4vw, 37px); border: 1px solid #dce5e9; border-radius: 7px; background: var(--paper); box-shadow: 0 12px 36px rgba(19,49,65,.055); }
+      .question-topline { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 18px; border-bottom: 1px solid #edf1f3; }
+      .question-number { display: inline-flex; align-items: center; min-height: 27px; padding: 0 10px; border-radius: 4px; color: #087d94; background: #e7f7f9; font-size: 11px; font-weight: 800; }
+      .question-category { color: #778791; font-size: 10px; text-align: right; }
+      .question-source { margin: 17px 0 8px; color: #88969e; font-size: 10px; }
+      .question-text { margin: 0; color: #213a49; font-size: clamp(16px, 2.3vw, 20px); font-weight: 650; line-height: 1.8; white-space: pre-wrap; overflow-wrap: anywhere; }
+      .response-hint { margin: 17px 0 8px; color: #687983; font-size: 10px; }
+      .choices { display: grid; gap: 8px; margin: 0; padding: 0; border: 0; }
+      .choice { display: grid; grid-template-columns: 18px 28px minmax(0,1fr); align-items: start; gap: 9px; padding: 12px 13px; border: 1px solid #dfe7ea; border-radius: 5px; color: #384f5c; background: #fff; cursor: pointer; transition: border-color .15s ease, background .15s ease; }
+      .choice:hover { border-color: #88cbd5; background: #f7fcfd; }
+      .choice:has(input:checked) { border-color: #31b3c3; background: #eefafb; box-shadow: inset 0 0 0 1px rgba(49,179,195,.13); }
+      .choice input { width: 15px; height: 15px; margin: 2px 0 0; accent-color: var(--cyan-dark); }
+      .choice-letter { display: grid; width: 23px; height: 23px; place-items: center; border: 1px solid #dbe4e8; border-radius: 50%; color: #68808c; font-size: 10px; font-weight: 700; }
+      .choice input:checked + .choice-letter { border-color: var(--cyan-dark); color: white; background: var(--cyan-dark); }
+      .choice-text { min-width: 0; padding-top: 2px; font-size: 12px; line-height: 1.7; white-space: pre-wrap; overflow-wrap: anywhere; }
+      .no-choices { margin: 14px 0; padding: 13px; border: 1px dashed #cbd9df; border-radius: 4px; color: #71818b; font-size: 12px; }
+      .solution-toggle { margin-top: 18px; padding: 0; border: 0; color: var(--cyan-dark); background: none; cursor: pointer; font-size: 11px; font-weight: 750; }
+      .solution-toggle:hover { color: #075d70; text-decoration: underline; }
+      .solution-box { margin-top: 12px; padding: 15px 17px; border-left: 3px solid var(--green); border-radius: 0 4px 4px 0; background: #eef8f5; }
+      .solution-box[hidden] { display: none; }
+      .solution-box strong { display: block; margin-bottom: 5px; color: #176c5a; font-size: 12px; }
+      .solution-box p { margin: 0; color: #49645f; font-size: 11px; line-height: 1.8; white-space: pre-wrap; }
+      .question-nav { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-top: 16px; }
+      .nav-button { min-width: 124px; min-height: 43px; padding: 0 17px; border: 1px solid #cbd9df; border-radius: 5px; color: #385260; background: white; cursor: pointer; font-size: 12px; font-weight: 700; }
+      .nav-button:hover:not(:disabled) { border-color: #74c4d0; color: #087d94; }
+      .nav-button.primary { border-color: var(--cyan-dark); color: white; background: var(--cyan-dark); }
+      .nav-button.primary:hover:not(:disabled) { border-color: #075f71; background: #075f71; }
+      .nav-button:disabled { cursor: not-allowed; opacity: .4; }
+      .nav-status { color: #86949b; font-size: 10px; text-align: center; }
+      .load-error { padding: 20px; border: 1px solid #ebc8c5; border-radius: 5px; color: #943f39; background: #fff7f6; font-size: 13px; }
+      .footer-note { margin: 15px 0 0; color: #85939a; font-size: 10px; line-height: 1.8; }
+      @media (max-width: 640px) {
+        .topbar { min-height: 60px; padding: 0 17px; }
+        .brand-mark { width: 34px; height: 34px; }
+        .back-link { font-size: 10px; }
+        main { width: calc(100% - 28px); padding-top: 22px; }
+        .page-heading { align-items: stretch; flex-direction: column; gap: 13px; }
+        .set-picker { flex-basis: auto; }
+        .question-card { min-height: 0; padding: 20px 16px; }
+        .choice { grid-template-columns: 17px 25px minmax(0,1fr); gap: 7px; padding: 11px 9px; }
+        .question-nav { gap: 8px; }
+        .nav-button { min-width: 98px; min-height: 41px; padding: 0 10px; }
+        .nav-status { max-width: 90px; line-height: 1.5; }
+      }
+      @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="./index.html" aria-label="กลับหน้าหลัก ICT Challenge">
+        <span class="brand-mark" aria-hidden="true">ICT</span>
+        <span class="brand-text"><strong>SIT · KMUTT</strong><small>ICT Challenge 2026</small></span>
+      </a>
+      <a class="back-link" href="./index.html">← กลับหน้าข้อมูลการแข่งขัน</a>
+    </header>
+    <main>
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">Question Practice</p>
+          <h1>โจทย์ฝึกทำ</h1>
+          <p class="heading-note">ทำทีละข้อ เลือกคำตอบ แล้วเปิดดูเฉลยเมื่อพร้อม</p>
+        </div>
+        <label class="set-picker" for="exam-set"><span>เลือกชุดข้อสอบ</span><select id="exam-set" disabled><option>กำลังโหลดชุดข้อสอบ…</option></select></label>
+      </div>
+      <div id="quiz-root" aria-live="polite">
+        <div class="load-error">กำลังโหลดโจทย์…</div>
+      </div>
+      <p class="footer-note">โจทย์บางข้อเรียบเรียงจากภาพเอกสารเพื่อให้อ่านง่าย หากตัวเลือกต้นฉบับไม่ตรงกับผลคำนวณ จะมีหมายเหตุไว้ในเฉลย</p>
+    </main>
+    <script>
+      (function () {
+        const examSelect = document.getElementById("exam-set");
+        const quizRoot = document.getElementById("quiz-root");
+        const letters = ["ก", "ข", "ค", "ง", "จ", "ฉ"];
+        const sourceOrder = ["UTCC, ชุดคัดเลือก ปี 2568", "UTCC, ชุดความรู้", "UTCC, รอบ 10 ทีม ปี 2568"];
+        let allQuestions = [];
+        let activeQuestions = [];
+        let questionIndex = 0;
+        let selectedAnswers = {};
+        let revealed = false;
+
+        function sourceGroup(source) {
+          if (source.indexOf("UTCC, รอบ 10 ทีม ปี 2568") === 0) return "UTCC, รอบ 10 ทีม ปี 2568";
+          return source;
+        }
+
+        function sortPastQuestions(items) {
+          return items.slice().sort(function (a, b) {
+            const sourceA = sourceGroup(a.item.source);
+            const sourceB = sourceGroup(b.item.source);
+            const rankA = sourceOrder.indexOf(sourceA);
+            const rankB = sourceOrder.indexOf(sourceB);
+            return (rankA < 0 ? 99 : rankA) - (rankB < 0 ? 99 : rankB) || a.index - b.index;
+          });
+        }
+
+        function makeSets() {
+          const utcc = allQuestions.map(function (item, index) { return { item: item, index: index }; }).filter(function (entry) { return entry.item.source.indexOf("UTCC,") === 0; });
+          const ict = allQuestions.map(function (item, index) { return { item: item, index: index }; }).filter(function (entry) { return entry.item.source.indexOf("ICT Challenge 2026") === 0; });
+          const sets = [
+            { id: "utcc-all", label: "ข้อสอบเก่า UTCC · รวมทุกชุด", questions: sortPastQuestions(utcc) },
+            { id: "utcc-selection", label: "UTCC · ชุดคัดเลือก ปี 2568", questions: allQuestions.map(function (item, index) { return { item: item, index: index }; }).filter(function (entry) { return entry.item.source === "UTCC, ชุดคัดเลือก ปี 2568"; }) },
+            { id: "utcc-knowledge", label: "UTCC · ชุดความรู้", questions: allQuestions.map(function (item, index) { return { item: item, index: index }; }).filter(function (entry) { return entry.item.source === "UTCC, ชุดความรู้"; }) },
+            { id: "utcc-final", label: "UTCC · รอบ 10 ทีม ปี 2568", questions: allQuestions.map(function (item, index) { return { item: item, index: index }; }).filter(function (entry) { return sourceGroup(entry.item.source) === "UTCC, รอบ 10 ทีม ปี 2568"; }) },
+            { id: "ict-2026", label: "ICT Challenge 2026 · แบบทดสอบออนไลน์", questions: ict }
+          ];
+          return sets;
+        }
+
+        let sets = [];
+
+        function isMultipleChoice(item) {
+          return item.question.indexOf("(เลือกได้หลายข้อ)") >= 0 || item.answer === "Quick Sort และ Merge Sort";
+        }
+
+        function textNode(tag, className, value) {
+          const node = document.createElement(tag);
+          if (className) node.className = className;
+          node.textContent = value;
+          return node;
+        }
+
+        function renderQuestion() {
+          if (!activeQuestions.length) {
+            quizRoot.innerHTML = '<div class="load-error">ชุดข้อสอบนี้ยังไม่มีโจทย์</div>';
+            return;
+          }
+          const entry = activeQuestions[questionIndex];
+          const item = entry.item;
+          const multi = isMultipleChoice(item);
+          const selected = selectedAnswers[entry.index] || [];
+          const percent = ((questionIndex + 1) / activeQuestions.length) * 100;
+          revealed = false;
+          quizRoot.replaceChildren();
+
+          const progress = document.createElement("div");
+          progress.className = "progress-area";
+          const meta = document.createElement("div");
+          meta.className = "progress-meta";
+          meta.append(textNode("strong", "", "ข้อ " + (questionIndex + 1) + " / " + activeQuestions.length), textNode("span", "", "ความคืบหน้า " + Math.round(percent) + "%"));
+          const track = document.createElement("div");
+          track.className = "progress-track";
+          const fill = document.createElement("div");
+          fill.className = "progress-fill";
+          fill.style.width = percent + "%";
+          track.appendChild(fill);
+          progress.append(meta, track);
+
+          const card = document.createElement("article");
+          card.className = "question-card";
+          const topline = document.createElement("div");
+          topline.className = "question-topline";
+          topline.append(textNode("span", "question-number", "ข้อที่ " + String(questionIndex + 1).padStart(2, "0")), textNode("span", "question-category", item.category || "คอมพิวเตอร์และเทคโนโลยีสารสนเทศ"));
+          const source = textNode("p", "question-source", "แหล่งข้อสอบ · " + item.source);
+          const question = textNode("h2", "question-text", item.question);
+          card.append(topline, source, question);
+
+          const choices = item.choices || [];
+          if (choices.length) {
+            card.appendChild(textNode("p", "response-hint", multi ? "เลือกคำตอบที่ถูกต้องได้มากกว่า 1 ข้อ" : "เลือกคำตอบที่ถูกต้อง 1 ข้อ"));
+            const fieldset = document.createElement("fieldset");
+            fieldset.className = "choices";
+            fieldset.setAttribute("aria-label", multi ? "ตัวเลือก ตอบได้หลายข้อ" : "ตัวเลือก เลือกได้หนึ่งข้อ");
+            choices.forEach(function (choice, choiceIndex) {
+              const label = document.createElement("label");
+              label.className = "choice";
+              const input = document.createElement("input");
+              input.type = multi ? "checkbox" : "radio";
+              input.name = "answer-" + entry.index;
+              input.value = String(choiceIndex);
+              input.checked = selected.indexOf(choiceIndex) >= 0;
+              const letter = textNode("span", "choice-letter", letters[choiceIndex] || String(choiceIndex + 1));
+              const choiceText = textNode("span", "choice-text", choice);
+              input.addEventListener("change", function () {
+                let current = selectedAnswers[entry.index] || [];
+                if (multi) {
+                  current = current.filter(function (value) { return value !== choiceIndex; });
+                  if (input.checked) current.push(choiceIndex);
+                } else {
+                  current = [choiceIndex];
+                }
+                selectedAnswers[entry.index] = current;
+                const navStatus = quizRoot.querySelector(".nav-status");
+                if (navStatus) navStatus.textContent = current.length ? "บันทึกคำตอบแล้ว" : "ยังไม่ได้เลือกคำตอบ";
+              });
+              label.append(input, letter, choiceText);
+              fieldset.appendChild(label);
+            });
+            card.appendChild(fieldset);
+          } else {
+            card.appendChild(textNode("p", "no-choices", "ข้อนี้ไม่มีตัวเลือกในชุดข้อมูล ลองคิดคำตอบก่อนเปิดดูเฉลย"));
+          }
+
+          const revealButton = document.createElement("button");
+          revealButton.type = "button";
+          revealButton.className = "solution-toggle";
+          revealButton.textContent = "ดูเฉลยและวิธีคิด";
+          revealButton.setAttribute("aria-expanded", "false");
+          const solution = document.createElement("section");
+          solution.className = "solution-box";
+          solution.hidden = true;
+          solution.setAttribute("aria-label", "เฉลยและวิธีคิด");
+          solution.append(textNode("strong", "", "เฉลย: " + (item.answer || "ไม่มีเฉลย")), textNode("p", "", item.explanation || ""));
+          revealButton.addEventListener("click", function () {
+            revealed = !revealed;
+            solution.hidden = !revealed;
+            revealButton.setAttribute("aria-expanded", String(revealed));
+            revealButton.textContent = revealed ? "ซ่อนเฉลย" : "ดูเฉลยและวิธีคิด";
+          });
+          card.append(revealButton, solution);
+
+          const navigation = document.createElement("div");
+          navigation.className = "question-nav";
+          const previous = textNode("button", "nav-button", "← ข้อก่อนหน้า");
+          previous.type = "button";
+          previous.disabled = questionIndex === 0;
+          previous.addEventListener("click", function () { questionIndex -= 1; renderQuestion(); window.scrollTo({ top: 0, behavior: "smooth" }); });
+          const status = textNode("span", "nav-status", selected.length ? "บันทึกคำตอบแล้ว" : "ยังไม่ได้เลือกคำตอบ");
+          const atEnd = questionIndex === activeQuestions.length - 1;
+          const next = textNode("button", "nav-button primary", atEnd ? "เริ่มชุดนี้ใหม่ ↺" : "ข้อถัดไป →");
+          next.type = "button";
+          next.addEventListener("click", function () {
+            questionIndex = atEnd ? 0 : questionIndex + 1;
+            renderQuestion();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          });
+          navigation.append(previous, status, next);
+
+          quizRoot.append(progress, card, navigation);
+        }
+
+        function activateSet(setId) {
+          const selectedSet = sets.find(function (set) { return set.id === setId; }) || sets[0];
+          if (!selectedSet) return;
+          activeQuestions = selectedSet.questions;
+          questionIndex = 0;
+          renderQuestion();
+        }
+
+        fetch("./practice.json")
+          .then(function (response) { if (!response.ok) throw new Error("Question data unavailable"); return response.json(); })
+          .then(function (data) {
+            allQuestions = data;
+            sets = makeSets();
+            examSelect.replaceChildren();
+            sets.forEach(function (set) {
+              const option = document.createElement("option");
+              option.value = set.id;
+              option.textContent = set.label + " · " + set.questions.length + " ข้อ";
+              examSelect.appendChild(option);
+            });
+            examSelect.disabled = false;
+            examSelect.value = "utcc-all";
+            examSelect.addEventListener("change", function () { activateSet(examSelect.value); });
+            activateSet("utcc-all");
+          })
+          .catch(function () { quizRoot.innerHTML = '<div class="load-error">โหลดโจทย์ไม่สำเร็จ กรุณารีเฟรชหน้าเว็บอีกครั้ง</div>'; });
+      }());
+    </script>
+  </body>
+</html>
