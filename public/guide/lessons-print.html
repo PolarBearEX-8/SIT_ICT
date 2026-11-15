@@ -1,0 +1,296 @@
+<!doctype html><html lang="th"><head><meta charset="utf-8"><style>@font-face{font-family:Prompt;src:url(Prompt-Regular.ttf)}@font-face{font-family:Prompt;src:url(Prompt-SemiBold.ttf);font-weight:600}@page{size:A4;margin:18mm 19mm 18mm}body{font-family:Prompt,Tahoma,sans-serif;color:#203137;font-size:10.5pt;line-height:1.7}h1{font-size:24pt;color:#245b83;line-height:1.35}h2{font-size:16pt;color:#245b83;border-bottom:1px solid #cbdfe9;padding-bottom:5px;margin-top:22pt;break-after:avoid}h3{font-size:12pt;color:#347fb5;break-after:avoid}p{margin:0 0 9pt}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#eef5f9;padding:10pt;font:9pt/1.4 Consolas,monospace;border-left:3px solid #348fc7;break-inside:avoid}code{font-family:Consolas,monospace;font-size:.9em}article{break-inside:avoid;border-bottom:1px solid #dbe6ed;padding:8pt 0}article p{margin:2pt 0}ol{margin:3pt 0 6pt;padding-left:23pt}.question{white-space:pre-wrap}.answer{color:#245b83}.newpage{break-before:page}</style></head><body><h1>บทเรียนเพิ่มเติม: การเขียนโปรแกรมและความรู้ที่ใช้ในโจทย์</h1>
+<p>บทเรียนนี้ต่อจากเนื้อหาสามกลุ่มเดิม เริ่มอ่านตามลำดับแล้วทดลองพิมพ์โปรแกรมด้วยตนเอง ข้อมูลเข้าและผลลัพธ์ในตัวอย่างเป็นเพียงตัวอย่าง ต้องทำตามรูปแบบของโจทย์จริงเสมอ</p>
+<h2>1. จากปัญหาสู่โปรแกรม</h2>
+<p>อัลกอริทึมคือลำดับขั้นตอนที่ชัดเจนและสิ้นสุดเพื่อแก้ปัญหา เริ่มจากระบุ input, output, ข้อจำกัด และกรณีขอบ เช่น ไม่มีข้อมูล มีหนึ่งรายการ หรือค่าติดลบ จากนั้นเขียน pseudocode ทดลองด้วยข้อมูลเล็กและติดตามค่าทีละบรรทัด ก่อนแปลงเป็นภาษาโปรแกรม</p>
+<pre>รับ n
+sum ← 0
+ทำซ้ำ i จาก 1 ถึง n
+    sum ← sum + i
+แสดง sum</pre>
+<p>เมื่อ n=3 ค่า sum เปลี่ยน 0 → 1 → 3 → 6 การสร้างตาราง trace ช่วยจับข้อผิดพลาดเรื่องลำดับและจำนวนรอบ Flowchart ใช้วงรีแทนเริ่ม/จบ สี่เหลี่ยมแทนการประมวลผล สี่เหลี่ยมด้านขนานแทนรับ/แสดง และข้าวหลามตัดแทนเงื่อนไข ลูกศรแสดงทิศทาง</p>
+<h2>2. โปรแกรมแรกและวิธีรัน</h2>
+<p>Python ทำงานผ่านตัวแปล ใช้การเยื้องบรรทัดกำหนดขอบเขต ส่วน C แปลเป็นโปรแกรมเครื่องก่อน และ Java แปลเป็น bytecode เพื่อให้ JVM ทำงาน แต่ละระบบต้องติดตั้งเครื่องมือที่เหมาะสมก่อน คำสั่งตัวอย่างต่อไปนี้รันใน terminal จากโฟลเดอร์ที่บันทึกไฟล์</p>
+<h3>Python: hello.py</h3><pre>print("Hello, ICT!")
+# รัน: python hello.py</pre>
+<h3>C: hello.c</h3><pre>#include &lt;stdio.h&gt;
+int main(void) {
+    printf("Hello, ICT!\n");
+    return 0;
+}
+/* คอมไพล์: gcc hello.c -o hello
+   รัน: ./hello   (Windows อาจใช้ .\hello.exe) */</pre>
+<h3>Java: Main.java</h3><pre>public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello, ICT!");
+    }
+}
+// คอมไพล์: javac Main.java
+// รัน: java Main</pre>
+<p>ใน Java ชื่อไฟล์ของ public class ต้องตรงกับชื่อคลาส รวมตัวพิมพ์ใหญ่เล็ก ใน C และ Java เครื่องหมาย ; ปิดคำสั่ง ส่วน { } ครอบบล็อก โค้ดตัวอย่างสำหรับแต่ละภาษาเป็นโปรแกรมแยกกัน</p>
+<h2>3. ตัวแปร ชนิดข้อมูล และรับข้อมูล</h2>
+<p>ตัวแปรเก็บค่า ชนิดข้อมูลบอกว่าจัดเก็บและใช้ค่าชนิดใด เช่น จำนวนเต็ม int ทศนิยม double/float ข้อความ string และค่าจริงเท็จ boolean ชื่อมีความหมาย ห้ามเริ่มด้วยตัวเลข และตัวพิมพ์ใหญ่เล็กต่างกัน ตรวจว่ารับข้อความแล้วแปลงเป็นตัวเลขก่อนคำนวณ</p>
+<h3>Python</h3><pre>name = input().strip()
+age = int(input())
+score = float(input())
+print(name, age + 1, score)</pre>
+<h3>C</h3><pre>#include &lt;stdio.h&gt;
+int main(void) {
+    int age;
+    double score;
+    if (scanf("%d %lf", &amp;age, &amp;score) != 2) return 1;
+    printf("%d %.2f\n", age + 1, score);
+    return 0;
+}</pre>
+<p>ใน C scanf ต้องส่งตำแหน่งตัวแปรด้วย &amp; สำหรับตัวเลข และ %lf ใช้รับ double ส่วน printf ใช้ %.2f แสดงทศนิยมสองตำแหน่ง ตรวจผลรับข้อมูลเพื่อไม่ใช้ค่าที่ไม่ได้กำหนด</p>
+<h3>Java</h3><pre>import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int age = in.nextInt();
+        double score = in.nextDouble();
+        System.out.printf("%d %.2f%n", age + 1, score);
+    }
+}</pre>
+<p>Python int(input()) อ่านหนึ่งบรรทัด หากโจทย์ให้หลายตัวเลขในบรรทัดเดียวใช้ <code>a, b = map(int, input().split())</code> Java ใช้ Scanner.nextInt() อ่านตัวเลขทีละตัว C ใช้ scanf ได้หลายค่า อย่าพิมพ์คำชวนป้อนข้อมูลถ้าระบบตรวจอัตโนมัติไม่ได้ขอ</p>
+<h2>4. ตัวดำเนินการ เงื่อนไข และขอบเขต</h2>
+<p>+ − * ใช้คำนวณ, % หาเศษ, == เปรียบเทียบ, != ไม่เท่ากัน, &lt; &gt; &lt;= &gt;= เปรียบเทียบลำดับ เครื่องหมาย = ใช้กำหนดค่า Python ใช้ and/or/not ส่วน C และ Java ใช้ &amp;&amp;/||/! Python ใช้ // หารปัดลง ขณะที่ C และ Java หารจำนวนเต็มตัดส่วนทศนิยมเข้าหาศูนย์; ค่าลบจึงอาจได้ต่างกัน หากต้องการทศนิยมใช้ชนิดทศนิยมอย่างน้อยหนึ่งตัว เช่น 5.0 / 2</p>
+<pre># Python
+n = int(input())
+if n % 2 == 0:
+    print("even")
+elif n &lt; 0:
+    print("negative odd")
+else:
+    print("positive odd")</pre>
+<pre>/* C: สมมติประกาศ int n แล้ว */
+if (n % 2 == 0) {
+    printf("even\n");
+} else if (n &lt; 0) {
+    printf("negative odd\n");
+} else {
+    printf("positive odd\n");
+}</pre>
+<pre>// Java: สมมติประกาศ int n แล้ว
+if (n % 2 == 0) {
+    System.out.println("even");
+} else if (n &lt; 0) {
+    System.out.println("negative odd");
+} else {
+    System.out.println("positive odd");
+}</pre>
+<p>if/else if เลือกสาขาแรกที่เป็นจริงเท่านั้น เงื่อนไขที่ต้องจริงทั้งคู่ใช้ AND และที่ต้องจริงอย่างน้อยหนึ่งข้อใช้ OR เช่น n != 10 เป็นจริงเมื่อ n=5 และ 15 แต่เท็จเมื่อ n=10 ใช้วงเล็บเมื่อมีหลายเงื่อนไขเพื่อลดความกำกวม</p>
+<h2>5. การทำซ้ำและการไล่ค่า</h2>
+<p>for เหมาะเมื่อทราบช่วง ส่วน while ทำซ้ำตราบใดที่เงื่อนไขเป็นจริง ต้องมีการเปลี่ยนค่าที่นำไปสู่การหยุด ระวังขอบเขต: range(1, 6) ให้ 1–5 ส่วน range(5) ให้ 0–4</p>
+<pre># Python: รวมเลขคู่ 1 ถึง n
+n = int(input())
+total = 0
+for i in range(1, n + 1):
+    if i % 2 == 0:
+        total += i
+print(total)</pre>
+<pre>/* C: หลังรับ int n แล้ว */
+int total = 0;
+for (int i = 1; i &lt;= n; i++) {
+    if (i % 2 == 0) total += i;
+}
+printf("%d\n", total);</pre>
+<pre>// Java: หลังรับ int n แล้ว
+int total = 0;
+for (int i = 1; i &lt;= n; i++) {
+    if (i % 2 == 0) total += i;
+}
+System.out.println(total);</pre>
+<p>เมื่อ n=6 ผลคือ 2+4+6=12 break ออกจากลูปปัจจุบัน ส่วน continue ข้ามไปเริ่มรอบถัดไป ลูปซ้อนต้องติดตามว่าลูปด้านในเริ่มใหม่กี่ครั้ง หากสองลูปวิ่ง n รอบเต็มจะทำงานประมาณ n² ครั้ง</p>
+<h2>6. อาร์เรย์ รายการ ข้อความ และการเปลี่ยนค่า</h2>
+<p>Index เริ่มที่ 0: ตัวแรกตำแหน่ง 0 ตัวสุดท้ายตำแหน่ง n−1 การเข้าถึงนอกช่วงเป็นข้อผิดพลาด Python list ปรับขนาดได้ C array ขนาดคงที่ตามที่ประกาศ Java array มีความยาวคงที่ ส่วน ArrayList เพิ่มสมาชิกได้</p>
+<pre># Python
+values = [5, 11, 2, 8, 15]
+values.append(7)
+for i in range(len(values)):
+    print(i, values[i])</pre>
+<pre>/* C */
+int values[] = {5, 11, 2, 8, 15};
+int n = sizeof values / sizeof values[0];
+for (int i = 0; i &lt; n; i++) printf("%d\n", values[i]);</pre>
+<pre>// Java
+int[] values = {5, 11, 2, 8, 15};
+for (int i = 0; i &lt; values.length; i++) {
+    System.out.println(values[i]);
+}</pre>
+<p>การสลับสองค่าใน C/Java ใช้ตัวแปรชั่วคราว <code>temp = a; a = b; b = temp;</code> Python ใช้ <code>a, b = b, a</code> ได้ ใน Python การส่ง list ให้ฟังก์ชันแล้ว append เปลี่ยน list เดิม แต่การกำหนดตัวแปรจำนวนเต็มใหม่ภายในฟังก์ชันไม่ได้เปลี่ยนตัวแปรจำนวนเต็มของผู้เรียก ต้อง return ผลกลับไป</p>
+<p>ข้อความ Python ใช้ len(s), s[i], s.lower(); Java ใช้ s.length(), s.charAt(i), s.equals(other) เพื่อเทียบเนื้อหา; C ใช้อาร์เรย์ char ลงท้ายด้วย '\0' และฟังก์ชันจาก &lt;string.h&gt; เช่น strlen และ strcmp ระวังพื้นที่และการสิ้นสุดข้อความ</p>
+<h2>7. ฟังก์ชันและ recursion</h2>
+<p>ฟังก์ชันแบ่งงาน ตั้งชื่อ รับพารามิเตอร์และอาจคืนค่า return ตัวแปรภายในมีขอบเขตของตัวเอง Recursion คือฟังก์ชันเรียกตัวเอง ต้องมี base case และแต่ละขั้นเข้าใกล้ฐาน ไม่เช่นนั้น stack อาจเต็ม</p>
+<pre># Python
+def factorial(n):
+    if n &lt;= 1:
+        return 1
+    return n * factorial(n - 1)
+print(factorial(4))  # 24</pre>
+<pre>/* C: วางฟังก์ชันก่อน main */
+int factorial(int n) {
+    if (n &lt;= 1) return 1;
+    return n * factorial(n - 1);
+}</pre>
+<pre>// Java: วางภายใน class Main
+static int factorial(int n) {
+    if (n &lt;= 1) return 1;
+    return n * factorial(n - 1);
+}</pre>
+<p>ตัวอย่างนี้สมมติ n เป็นจำนวนเต็มไม่ติดลบและผลไม่เกินช่วงชนิดข้อมูล หาก f(a,b) คืน 1 เมื่อ b≤0 นอกนั้นคืน a×f(a,b−2) แล้ว f(2,9)=2⁵=32 เพราะ b เป็น 9,7,5,3,1 ก่อนถึง −1</p>
+<h2>8. โครงสร้างข้อมูล OOP และการแก้บั๊ก</h2>
+<p>Stack เข้าหลังออกก่อน ใช้กับการเรียกฟังก์ชันและ undo; Queue เข้าก่อนออกก่อน ใช้กับคิวงาน; Dictionary/Map จับคู่ key กับ value; Set เก็บสมาชิกไม่ซ้ำ Linked list เชื่อมโหนดด้วยตัวอ้างอิง ส่วน tree เป็นโครงสร้างลำดับชั้น เลือกจากงานที่ต้องทำ ไม่ใช่จำแต่ชื่อ</p>
+<p>OOP: class เป็นแม่แบบ object เป็นอินสแตนซ์ encapsulation รวมข้อมูลและพฤติกรรมพร้อมควบคุมการเข้าถึง inheritance สืบทอดความสามารถ polymorphism ใช้อินเทอร์เฟซเดียวกับพฤติกรรมต่างกัน abstraction มองสิ่งจำเป็นโดยซ่อนรายละเอียด โดย C เป็นภาษาเชิงกระบวนการ ส่วน Java และ Python รองรับคลาส</p>
+<pre># Python
+class Counter:
+    def __init__(self):
+        self.value = 0
+    def increment(self):
+        self.value += 1
+c = Counter()
+c.increment()
+print(c.value)  # 1</pre>
+<p>Syntax error คือรูปแบบภาษาไม่ถูก Runtime error เกิดระหว่างรัน เช่น หารศูนย์หรือ index เกิน Logic error โปรแกรมรันได้แต่ผลผิด เริ่มตรวจจากข้อความ error หมายเลขบรรทัด ข้อมูลตัวอย่าง และพิมพ์ค่ากลางหรือใช้ debugger ทดลองกรณีว่าง ค่าต่ำสุด/สูงสุด และค่าซ้ำ</p>
+<h2>9. ค้นหา เรียงลำดับ และ Big-O</h2>
+<p>Linear search ไล่ทีละตัว ใช้ O(n) ในกรณีแย่ Binary search ลดช่วงค้นหาครึ่งหนึ่ง ใช้ O(log n) แต่ข้อมูลต้องเรียงตามเกณฑ์เดียวกันก่อน Bubble sort เปรียบเทียบคู่ติดกัน Selection sort เลือกตัวเล็กสุดที่เหลือ ทั้งสองโดยทั่วไปใช้เวลา O(n²) ส่วน Merge sort แบ่งแล้วรวม ใช้ O(n log n) แม้กรณีแย่และมักต้องใช้หน่วยความจำเพิ่ม Quick sort แบ่งตาม pivot เฉลี่ย O(n log n) แต่กรณีแย่อาจ O(n²) การจัดเรียงในตัวภาษาเป็นทางเลือกที่ดีเมื่อโจทย์ไม่ได้บังคับวิธี</p>
+<pre># Python
+values = [5, 2, 4]
+values.sort()          # เปลี่ยน list เดิม
+print(values)          # [2, 4, 5]</pre>
+<pre>/* C: เปรียบเทียบค่าสลับกันด้วย bubble sort */
+for (int end = n - 1; end &gt; 0; end--)
+    for (int i = 0; i &lt; end; i++)
+        if (a[i] &gt; a[i+1]) {
+            int t = a[i]; a[i] = a[i+1]; a[i+1] = t;
+        }</pre>
+<pre>// Java: import java.util.Arrays;
+Arrays.sort(values);</pre>
+<p>Euclidean algorithm หา ห.ร.ม. โดยแทน (a,b) ด้วย (b,a%b) จน b=0 เช่น gcd(15,5)=5 จำนวนที่เพิ่มเป็นสองเท่าทุกรอบจาก 1 คือ 2ⁿ ดังนั้น 2⁸=256 ยังไม่ถึง 500 แต่ 2⁹=512 ถึงแล้ว บิต b ตัวแทนรหัสได้ 2ᵇ แบบ จึงต้องใช้ 6 บิตสำหรับ 50 รหัส</p>
+<h2>10. Library, import, package และ plugin</h2>
+<p>Library คือโค้ดที่นำกลับมาใช้ เช่น คณิตศาสตร์หรือจัดการข้อมูล Module คือหน่วยไฟล์หรือหน่วยโค้ด Package จัดกลุ่ม module ส่วน plugin คือส่วนเสริมที่แอปหรือเครื่องมือหลักเรียกใช้งานผ่านจุดต่อที่รองรับ ตัวอย่างส่วนขยาย editor ช่วยตรวจ syntax แต่ไม่ใช่สิ่งที่ต้อง import ในโปรแกรมเสมอไป</p>
+<pre># Python: math เป็น standard library
+import math
+print(math.sqrt(25))
+from collections import Counter
+print(Counter(["a", "b", "a"])["a"])  # 2</pre>
+<p>แพ็กเกจภายนอกอาจติดตั้งด้วย <code>python -m pip install package_name</code> ภายใน virtual environment เช่น <code>python -m venv .venv</code> จากนั้นเปิดใช้งานตามระบบปฏิบัติการ ต้องใช้ชื่อแพ็กเกจที่เชื่อถือได้และตรวจเวอร์ชัน ในการแข่งขันให้ตรวจว่าระบบอนุญาต package ภายนอกหรือไม่ ห้ามสมมติว่ามีอินเทอร์เน็ตหรือติดตั้งเพิ่มได้</p>
+<pre>/* C: header ประกาศ interface */
+#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+/* บางระบบต้อง link math: gcc main.c -o main -lm */</pre>
+<pre>// Java: import class จาก standard library
+import java.util.Arrays;
+import java.util.Scanner;</pre>
+<p>C #include ให้ preprocessor นำประกาศจาก header มาใช้ และการ link เชื่อม implementation ที่ต้องการ Java import ทำให้เรียกชื่อคลาสโดยไม่ต้องเขียนชื่อ package เต็มทุกครั้ง ไม่ได้ติดตั้ง library อัตโนมัติ Python import ค้นหา module จาก environment ของ interpreter หากพบ ModuleNotFoundError ให้ตรวจชื่อและ environment ก่อน</p>
+<h2>11. Data และ AI: ศัพท์เพิ่มเติมจากโจทย์</h2>
+<p>Embedding แทนคำหรือข้อมูลด้วยเวกเตอร์ Cosine similarity วัดมุมระหว่างเวกเตอร์ x,y ด้วย (x·y)/(|x||y|) โดยเวกเตอร์ต้องไม่เป็นศูนย์ ค่าใกล้ 1 แสดงทิศทางใกล้กัน ค่า 0 ตั้งฉาก และ −1 ตรงข้าม ความใกล้เชิงความหมายขึ้นกับโมเดลและบริบท ไม่ได้รับประกันจากสูตรเพียงอย่างเดียว</p>
+<p>Encoder แปลงข้อมูลนำเข้าเป็นตัวแทนภายใน ส่วน decoder ใช้ตัวแทนหรือบริบทเพื่อสร้างผลลัพธ์ เช่น แปลข้อความ ทั้งนี้สถาปัตยกรรมแต่ละระบบต่างกัน ตัวแทนที่ส่งระหว่างส่วนอาจเป็นชุดเวกเตอร์ ไม่จำเป็นต้องเป็นเวกเตอร์เดียว One-hot encoding ของข้อมูลตารางเป็นอีกความหมายของคำว่า encoding</p>
+<p>Softmax แปลงคะแนน z ของหลายคลาสเป็น pᵢ=e^zᵢ/Σe^zⱼ ผลแต่ละค่าอยู่ระหว่าง 0 ถึง 1 และรวมเป็น 1 ใช้บ่อยกับการจำแนกหนึ่งคลาสจากหลายคลาส เช่น logits [0,0] ให้ [0.5,0.5] แต่คะแนนที่ดูเป็นความน่าจะเป็นอาจยังไม่ calibrated</p>
+<p>Expert system ใช้ knowledge base เก็บข้อเท็จจริงและกฎ ส่วน inference engine ใช้กฎอนุมานผล ตัวอย่าง IF ไข้สูง AND ไอ THEN แนะนำให้ประเมินเพิ่มเติม ระบบแบบกำหนดกฎไม่จำเป็นต้องเรียนรู้จากข้อมูล k-NN เป็น lazy learning เพราะมักเก็บตัวอย่างฝึกไว้ แล้วคำนวณระยะและเลือกเพื่อนบ้านตอนทำนาย จึงต้องคิดเรื่องสเกลและต้นทุนการทำนาย</p>
+<h2>12. ระบบ เครือข่าย และตรรกะเพิ่มเติม</h2>
+<p>Paging แบ่งหน่วยความจำเป็นหน้าขนาดคงที่ ส่วน segmentation แบ่งตามส่วนเชิงตรรกะที่ขนาดอาจต่างกัน Virtual memory ช่วยให้โปรแกรมใช้พื้นที่ที่อยู่เสมือนโดยระบบจัดการการแมป ระบบ time-sharing แบ่งเวลา CPU เป็นช่วงสั้นให้หลายงานสลับกัน GPU มีหน่วยประมวลผลขนานจำนวนมากเหมาะกับกราฟิกและงานเมทริกซ์ ส่วน simultaneous multithreading ให้หนึ่งคอร์จัดการหลายเธรดเชิงตรรกะ แต่ไม่ได้รับประกันความเร็วเพิ่มเป็นสองเท่า</p>
+<p>Virtual machine จำลองเครื่องและมี guest OS ของตนบน hypervisor ส่วน container แยกโปรเซสและใช้ kernel ร่วมกับ host ที่เข้ากันได้ จึงมี overhead ต่างกัน แต่ขอบเขตความปลอดภัยและการใช้งานขึ้นกับระบบ Edge computing ประมวลผลใกล้แหล่งข้อมูลเพื่อลดเวลาหน่วงหรือการส่งข้อมูล ส่วน cloud ให้ทรัพยากรผ่านเครือข่าย การเพิ่มลดทรัพยากรตามความต้องการเรียก elasticity; load balancing กระจายงาน; replication เก็บสำเนาหลายตำแหน่ง ช่วยความพร้อมใช้งานและอาจเพิ่มความเร็วอ่าน แต่ไม่ใช่ backup เสมอไป</p>
+<p>การแบ่ง IPv4 แบบ classful เดิมดู octet แรก: Class A 1–126, B 128–191, C 192–223 (127 ใช้ loopback); ปัจจุบันใช้ CIDR/subnet mask ในการกำหนดเครือข่ายจริง ไม่ควรใช้ class เดา mask ของเครือข่ายปัจจุบัน OSI ชั้น Data Link สร้าง frame และ switch ทำงานในชั้นนี้; HTTP อยู่ชั้น Application</p>
+<p>Caesar cipher เลื่อนตัวอักษรตามจำนวนตำแหน่งและวน Z กลับ A เช่น UTCC เลื่อน 2 เป็น W V E E หรือ WVEE เป็นวิธีสอนแนวคิด ไม่ปลอดภัยสำหรับปกป้องข้อมูลจริง คำสั่ง <code>cd ..\Sci</code> บน Windows ย้ายไปโฟลเดอร์ Sci ซึ่งเป็นโฟลเดอร์พี่น้องจากตำแหน่งปัจจุบัน</p>
+<p>โจทย์ตรรกะต้องใช้ทุกเงื่อนไขพร้อมกัน ถ้า A→B และ A จริง สรุป B ได้ แต่ถ้า B จริงเพียงอย่างเดียวสรุป A ไม่ได้ หากเงื่อนไขบังคับให้ข้อเท็จจริงหนึ่งทั้งจริงและเท็จ แสดงว่าชุดเบาะแสขัดแย้งกัน อย่าเลือกคำตอบโดยละเลยเบาะแส</p>
+<h2>13. ตัวอย่างโจทย์ครบขั้น: รวมจำนวนคู่</h2>
+<p>โจทย์: รับจำนวนเต็ม n ตามด้วยจำนวนเต็ม n ตัว แล้วแสดงผลรวมเฉพาะจำนวนคู่ เช่น input คือ 5 แล้วตามด้วย 1 2 3 4 5 ผลคือ 6 วิเคราะห์ก่อนเขียน: ต้องอ่าน n ครั้ง เก็บผลรวมเริ่มที่ศูนย์ ใช้เศษจากการหารสองตรวจความเป็นคู่ และพิมพ์เมื่ออ่านครบ หาก n=0 ผลคือ 0 ตัวอย่างนี้สมมติผลรวมไม่เกินขอบเขตชนิดข้อมูลที่เลือก</p>
+<h3>Python</h3><pre>import sys
+
+data = list(map(int, sys.stdin.buffer.read().split()))
+if data:
+    n = data[0]
+    values = data[1:1 + n]
+    total = 0
+    for value in values:
+        if value % 2 == 0:
+            total += value
+    print(total)</pre>
+<p>sys.stdin.buffer.read() อ่านข้อมูลทั้งหมด split() แยกตามช่องว่างหรือบรรทัด map(int, ...) แปลงแต่ละรายการ และ list ทำให้เข้าถึงด้วย index/slice ได้ วิธีนี้ถือว่าโจทย์ให้ข้อมูลครบ n ค่า ใช้หน่วยความจำตามขนาด input หากข้อมูลใหญ่มากให้พิจารณาอ่านทีละบรรทัด</p>
+<h3>C</h3><pre>#include &lt;stdio.h&gt;
+int main(void) {
+    int n, value;
+    long long total = 0;
+    if (scanf("%d", &amp;n) != 1) return 0;
+    for (int i = 0; i &lt; n; i++) {
+        if (scanf("%d", &amp;value) != 1) return 1;
+        if (value % 2 == 0) total += value;
+    }
+    printf("%lld\n", total);
+    return 0;
+}</pre>
+<p>long long ให้ช่วงจำนวนเต็มมากกว่า int ในการใช้งานทั่วไป แต่ยังมีขีดจำกัด ตรวจข้อกำหนดโจทย์เสมอ ตัวแปร value ถูกอ่านใหม่แต่ละรอบ จึงไม่ต้องเก็บข้อมูลทุกตัว</p>
+<h3>Java</h3><pre>import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        if (!in.hasNextInt()) return;
+        int n = in.nextInt();
+        long total = 0;
+        for (int i = 0; i &lt; n; i++) {
+            int value = in.nextInt();
+            if (value % 2 == 0) total += value;
+        }
+        System.out.println(total);
+    }
+}</pre>
+<p>ทดสอบอย่างน้อยสามกรณี: 5 กับ 1 2 3 4 5 ได้ 6; 3 กับ −2 0 7 ได้ −2; 0 ได้ 0 หากจำนวนข้อมูลมาก Scanner อาจช้า จึงอาจใช้ BufferedReader และ StringTokenizer ตามข้อจำกัดของระบบสอบ</p>
+<h2>14. ตัวอย่างค้นหา: ตำแหน่งแรกของค่า</h2>
+<p>โจทย์ให้รายการและค่า target ต้องการตำแหน่งแรกโดยเริ่มนับจาก 0 หากไม่มีให้คืน −1 เริ่ม answer=−1 ไล่ i จาก 0 ถึง n−1 เมื่อพบให้กำหนด answer=i แล้วหยุด หากมีค่าซ้ำ การหยุดทันทีทำให้ได้ตำแหน่งแรก ต้นทุนกรณีแย่ O(n) และใช้พื้นที่เพิ่ม O(1) นอกเหนือจากรายการ</p>
+<pre># Python
+values = [4, 7, 4, 9]
+target = 4
+answer = -1
+for i in range(len(values)):
+    if values[i] == target:
+        answer = i
+        break
+print(answer)  # 0</pre>
+<pre>/* C: array a ความยาว n และ target กำหนดไว้แล้ว */
+int answer = -1;
+for (int i = 0; i &lt; n; i++) {
+    if (a[i] == target) { answer = i; break; }
+}</pre>
+<pre>// Java: array values และ target กำหนดไว้แล้ว
+int answer = -1;
+for (int i = 0; i &lt; values.length; i++) {
+    if (values[i] == target) { answer = i; break; }
+}</pre>
+<p>หากโจทย์ต้องการนับตำแหน่งเริ่ม 1 ให้แปลงเฉพาะกรณีที่พบ อย่าเปลี่ยน −1 เป็น 0 ส่วน binary search ใช้เมื่อข้อมูลเรียงแล้ว และหากมีค่าซ้ำต้องปรับวิธีเพื่อหาตำแหน่งแรกโดยเฉพาะ</p>
+<h2>15. ข้อมูลแบบ map, set และการนับความถี่</h2>
+<p>เมื่ออยากทราบว่าแต่ละคำปรากฏกี่ครั้ง ใช้ map จากคำไปจำนวน เริ่มค่าที่ไม่เคยพบเป็น 0 แล้วเพิ่มหนึ่ง ใช้ตรวจคำซ้ำ โหวต หรือหาฐานนิยม หากต้องการเพียงรู้ว่าพบหรือไม่ใช้ set แทนได้</p>
+<pre># Python
+counts = {}
+for word in ["cat", "dog", "cat"]:
+    counts[word] = counts.get(word, 0) + 1
+print(counts["cat"])  # 2</pre>
+<pre>// Java: import java.util.HashMap;
+HashMap&lt;String, Integer&gt; counts = new HashMap&lt;&gt;();
+for (String word : new String[]{"cat", "dog", "cat"}) {
+    counts.put(word, counts.getOrDefault(word, 0) + 1);
+}
+System.out.println(counts.get("cat"));</pre>
+<p>C ไม่มี map มาตรฐานแบบสำเร็จรูปในไลบรารีพื้นฐาน หากช่วงค่าจำกัด เช่น คะแนน 0–100 ใช้ int count[101] = {0}; แล้วเพิ่ม count[score] หลังตรวจช่วง หาก key เป็นข้อความหรือช่วงกว้าง ต้องเลือกโครงสร้างที่เหมาะกับข้อจำกัด</p>
+<h2>16. C pointers และหน่วยความจำที่ควรรู้</h2>
+<p>ตัวแปรมีค่าและตำแหน่งในหน่วยความจำ &amp;x คือตำแหน่งของ x; int *p ประกาศ pointer ไปยัง int; *p อ่านหรือแก้ค่าที่ตำแหน่งซึ่ง p ชี้อยู่ เมื่อส่ง &amp;x ให้ฟังก์ชัน ฟังก์ชันสามารถแก้ x ผ่าน pointer ได้ ต้องไม่ dereference pointer ที่ไม่ได้กำหนดหรือเป็น NULL</p>
+<pre>#include &lt;stdio.h&gt;
+void add_one(int *p) {
+    if (p != NULL) *p = *p + 1;
+}
+int main(void) {
+    int x = 4;
+    add_one(&amp;x);
+    printf("%d\n", x);  /* 5 */
+    return 0;
+}</pre>
+<p>ใน C การส่งอาร์เรย์ให้ฟังก์ชันมักส่งตัวชี้ไปสมาชิกแรก จึงต้องส่งความยาวแยก ห้ามอ่านเกินขอบเขต malloc จองหน่วยความจำแบบ dynamic และต้องตรวจผลก่อนใช้พร้อม free เมื่อเลิกใช้ โดยไม่ใช้ซ้ำหลัง free ถ้าโจทย์ขนาดเล็กและทราบขอบเขต การใช้อาร์เรย์ขนาดเหมาะสมมักเข้าใจง่ายกว่า</p>
+<h2>17. อินพุตหลายบรรทัด ไฟล์ และข้อควรระวังภาษา</h2>
+<p>แยกงานรับ input ประมวลผล และแสดง output ให้ชัด สังเกตว่าโจทย์กำหนดจำนวน test cases หรือให้อ่านจน EOF; ข้อความที่มีช่องว่างต้องอ่านทั้งบรรทัด Java Scanner.nextInt() เหลือ newline ใน buffer เมื่อตามด้วย nextLine() อาจต้องอ่าน newline ทิ้งหนึ่งครั้งอย่างมีเหตุผลตามรูปแบบ input</p>
+<pre># Python: อ่านไฟล์ข้อความแบบระบุ encoding
+with open("data.txt", encoding="utf-8") as f:
+    for line in f:
+        print(line.rstrip("\n"))</pre>
+<p>ตัวอย่างไฟล์เหมาะสำหรับฝึกในเครื่อง แต่ระบบสอบส่วนใหญ่รับจาก standard input อย่ากำหนดชื่อไฟล์เองถ้าโจทย์ไม่ได้สั่ง ใช้ try/except ใน Python หรือ try/catch ใน Java เมื่อออกแบบโปรแกรมที่ต้องจัดการข้อผิดพลาด แต่ไม่ควรซ่อนข้อผิดพลาดทั้งหมดโดยไม่ตรวจสาเหตุ</p>
+<h2>18. วิธีฝึกให้เขียนได้เอง</h2>
+<p>รอบแรกอ่านตัวอย่างและอธิบายแต่ละบรรทัด รอบสองปิดหนังสือแล้วเขียนจากความเข้าใจ รอบสามเปลี่ยนโจทย์ เช่น จากรวมเลขคู่เป็นนับเลขคี่ จากค้นหาตำแหน่งแรกเป็นตำแหน่งสุดท้าย และทดสอบกรณีขอบ หากผลไม่ตรง ให้จด input ที่ทำให้ผิดแล้วไล่ค่าทีละบรรทัด จนระบุจุดผิดได้ หลีกเลี่ยงการจำ output โดยไม่เข้าใจเหตุผล</p>
+</body></html>

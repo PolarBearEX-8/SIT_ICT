@@ -193,3 +193,103 @@ import java.util.Scanner;</pre>
 <p>การแบ่ง IPv4 แบบ classful เดิมดู octet แรก: Class A 1–126, B 128–191, C 192–223 (127 ใช้ loopback); ปัจจุบันใช้ CIDR/subnet mask ในการกำหนดเครือข่ายจริง ไม่ควรใช้ class เดา mask ของเครือข่ายปัจจุบัน OSI ชั้น Data Link สร้าง frame และ switch ทำงานในชั้นนี้; HTTP อยู่ชั้น Application</p>
 <p>Caesar cipher เลื่อนตัวอักษรตามจำนวนตำแหน่งและวน Z กลับ A เช่น UTCC เลื่อน 2 เป็น W V E E หรือ WVEE เป็นวิธีสอนแนวคิด ไม่ปลอดภัยสำหรับปกป้องข้อมูลจริง คำสั่ง <code>cd ..\Sci</code> บน Windows ย้ายไปโฟลเดอร์ Sci ซึ่งเป็นโฟลเดอร์พี่น้องจากตำแหน่งปัจจุบัน</p>
 <p>โจทย์ตรรกะต้องใช้ทุกเงื่อนไขพร้อมกัน ถ้า A→B และ A จริง สรุป B ได้ แต่ถ้า B จริงเพียงอย่างเดียวสรุป A ไม่ได้ หากเงื่อนไขบังคับให้ข้อเท็จจริงหนึ่งทั้งจริงและเท็จ แสดงว่าชุดเบาะแสขัดแย้งกัน อย่าเลือกคำตอบโดยละเลยเบาะแส</p>
+<h2>13. ตัวอย่างโจทย์ครบขั้น: รวมจำนวนคู่</h2>
+<p>โจทย์: รับจำนวนเต็ม n ตามด้วยจำนวนเต็ม n ตัว แล้วแสดงผลรวมเฉพาะจำนวนคู่ เช่น input คือ 5 แล้วตามด้วย 1 2 3 4 5 ผลคือ 6 วิเคราะห์ก่อนเขียน: ต้องอ่าน n ครั้ง เก็บผลรวมเริ่มที่ศูนย์ ใช้เศษจากการหารสองตรวจความเป็นคู่ และพิมพ์เมื่ออ่านครบ หาก n=0 ผลคือ 0 ตัวอย่างนี้สมมติผลรวมไม่เกินขอบเขตชนิดข้อมูลที่เลือก</p>
+<h3>Python</h3><pre>import sys
+
+data = list(map(int, sys.stdin.buffer.read().split()))
+if data:
+    n = data[0]
+    values = data[1:1 + n]
+    total = 0
+    for value in values:
+        if value % 2 == 0:
+            total += value
+    print(total)</pre>
+<p>sys.stdin.buffer.read() อ่านข้อมูลทั้งหมด split() แยกตามช่องว่างหรือบรรทัด map(int, ...) แปลงแต่ละรายการ และ list ทำให้เข้าถึงด้วย index/slice ได้ วิธีนี้ถือว่าโจทย์ให้ข้อมูลครบ n ค่า ใช้หน่วยความจำตามขนาด input หากข้อมูลใหญ่มากให้พิจารณาอ่านทีละบรรทัด</p>
+<h3>C</h3><pre>#include &lt;stdio.h&gt;
+int main(void) {
+    int n, value;
+    long long total = 0;
+    if (scanf("%d", &amp;n) != 1) return 0;
+    for (int i = 0; i &lt; n; i++) {
+        if (scanf("%d", &amp;value) != 1) return 1;
+        if (value % 2 == 0) total += value;
+    }
+    printf("%lld\n", total);
+    return 0;
+}</pre>
+<p>long long ให้ช่วงจำนวนเต็มมากกว่า int ในการใช้งานทั่วไป แต่ยังมีขีดจำกัด ตรวจข้อกำหนดโจทย์เสมอ ตัวแปร value ถูกอ่านใหม่แต่ละรอบ จึงไม่ต้องเก็บข้อมูลทุกตัว</p>
+<h3>Java</h3><pre>import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        if (!in.hasNextInt()) return;
+        int n = in.nextInt();
+        long total = 0;
+        for (int i = 0; i &lt; n; i++) {
+            int value = in.nextInt();
+            if (value % 2 == 0) total += value;
+        }
+        System.out.println(total);
+    }
+}</pre>
+<p>ทดสอบอย่างน้อยสามกรณี: 5 กับ 1 2 3 4 5 ได้ 6; 3 กับ −2 0 7 ได้ −2; 0 ได้ 0 หากจำนวนข้อมูลมาก Scanner อาจช้า จึงอาจใช้ BufferedReader และ StringTokenizer ตามข้อจำกัดของระบบสอบ</p>
+<h2>14. ตัวอย่างค้นหา: ตำแหน่งแรกของค่า</h2>
+<p>โจทย์ให้รายการและค่า target ต้องการตำแหน่งแรกโดยเริ่มนับจาก 0 หากไม่มีให้คืน −1 เริ่ม answer=−1 ไล่ i จาก 0 ถึง n−1 เมื่อพบให้กำหนด answer=i แล้วหยุด หากมีค่าซ้ำ การหยุดทันทีทำให้ได้ตำแหน่งแรก ต้นทุนกรณีแย่ O(n) และใช้พื้นที่เพิ่ม O(1) นอกเหนือจากรายการ</p>
+<pre># Python
+values = [4, 7, 4, 9]
+target = 4
+answer = -1
+for i in range(len(values)):
+    if values[i] == target:
+        answer = i
+        break
+print(answer)  # 0</pre>
+<pre>/* C: array a ความยาว n และ target กำหนดไว้แล้ว */
+int answer = -1;
+for (int i = 0; i &lt; n; i++) {
+    if (a[i] == target) { answer = i; break; }
+}</pre>
+<pre>// Java: array values และ target กำหนดไว้แล้ว
+int answer = -1;
+for (int i = 0; i &lt; values.length; i++) {
+    if (values[i] == target) { answer = i; break; }
+}</pre>
+<p>หากโจทย์ต้องการนับตำแหน่งเริ่ม 1 ให้แปลงเฉพาะกรณีที่พบ อย่าเปลี่ยน −1 เป็น 0 ส่วน binary search ใช้เมื่อข้อมูลเรียงแล้ว และหากมีค่าซ้ำต้องปรับวิธีเพื่อหาตำแหน่งแรกโดยเฉพาะ</p>
+<h2>15. ข้อมูลแบบ map, set และการนับความถี่</h2>
+<p>เมื่ออยากทราบว่าแต่ละคำปรากฏกี่ครั้ง ใช้ map จากคำไปจำนวน เริ่มค่าที่ไม่เคยพบเป็น 0 แล้วเพิ่มหนึ่ง ใช้ตรวจคำซ้ำ โหวต หรือหาฐานนิยม หากต้องการเพียงรู้ว่าพบหรือไม่ใช้ set แทนได้</p>
+<pre># Python
+counts = {}
+for word in ["cat", "dog", "cat"]:
+    counts[word] = counts.get(word, 0) + 1
+print(counts["cat"])  # 2</pre>
+<pre>// Java: import java.util.HashMap;
+HashMap&lt;String, Integer&gt; counts = new HashMap&lt;&gt;();
+for (String word : new String[]{"cat", "dog", "cat"}) {
+    counts.put(word, counts.getOrDefault(word, 0) + 1);
+}
+System.out.println(counts.get("cat"));</pre>
+<p>C ไม่มี map มาตรฐานแบบสำเร็จรูปในไลบรารีพื้นฐาน หากช่วงค่าจำกัด เช่น คะแนน 0–100 ใช้ int count[101] = {0}; แล้วเพิ่ม count[score] หลังตรวจช่วง หาก key เป็นข้อความหรือช่วงกว้าง ต้องเลือกโครงสร้างที่เหมาะกับข้อจำกัด</p>
+<h2>16. C pointers และหน่วยความจำที่ควรรู้</h2>
+<p>ตัวแปรมีค่าและตำแหน่งในหน่วยความจำ &amp;x คือตำแหน่งของ x; int *p ประกาศ pointer ไปยัง int; *p อ่านหรือแก้ค่าที่ตำแหน่งซึ่ง p ชี้อยู่ เมื่อส่ง &amp;x ให้ฟังก์ชัน ฟังก์ชันสามารถแก้ x ผ่าน pointer ได้ ต้องไม่ dereference pointer ที่ไม่ได้กำหนดหรือเป็น NULL</p>
+<pre>#include &lt;stdio.h&gt;
+void add_one(int *p) {
+    if (p != NULL) *p = *p + 1;
+}
+int main(void) {
+    int x = 4;
+    add_one(&amp;x);
+    printf("%d\n", x);  /* 5 */
+    return 0;
+}</pre>
+<p>ใน C การส่งอาร์เรย์ให้ฟังก์ชันมักส่งตัวชี้ไปสมาชิกแรก จึงต้องส่งความยาวแยก ห้ามอ่านเกินขอบเขต malloc จองหน่วยความจำแบบ dynamic และต้องตรวจผลก่อนใช้พร้อม free เมื่อเลิกใช้ โดยไม่ใช้ซ้ำหลัง free ถ้าโจทย์ขนาดเล็กและทราบขอบเขต การใช้อาร์เรย์ขนาดเหมาะสมมักเข้าใจง่ายกว่า</p>
+<h2>17. อินพุตหลายบรรทัด ไฟล์ และข้อควรระวังภาษา</h2>
+<p>แยกงานรับ input ประมวลผล และแสดง output ให้ชัด สังเกตว่าโจทย์กำหนดจำนวน test cases หรือให้อ่านจน EOF; ข้อความที่มีช่องว่างต้องอ่านทั้งบรรทัด Java Scanner.nextInt() เหลือ newline ใน buffer เมื่อตามด้วย nextLine() อาจต้องอ่าน newline ทิ้งหนึ่งครั้งอย่างมีเหตุผลตามรูปแบบ input</p>
+<pre># Python: อ่านไฟล์ข้อความแบบระบุ encoding
+with open("data.txt", encoding="utf-8") as f:
+    for line in f:
+        print(line.rstrip("\n"))</pre>
+<p>ตัวอย่างไฟล์เหมาะสำหรับฝึกในเครื่อง แต่ระบบสอบส่วนใหญ่รับจาก standard input อย่ากำหนดชื่อไฟล์เองถ้าโจทย์ไม่ได้สั่ง ใช้ try/except ใน Python หรือ try/catch ใน Java เมื่อออกแบบโปรแกรมที่ต้องจัดการข้อผิดพลาด แต่ไม่ควรซ่อนข้อผิดพลาดทั้งหมดโดยไม่ตรวจสาเหตุ</p>
+<h2>18. วิธีฝึกให้เขียนได้เอง</h2>
+<p>รอบแรกอ่านตัวอย่างและอธิบายแต่ละบรรทัด รอบสองปิดหนังสือแล้วเขียนจากความเข้าใจ รอบสามเปลี่ยนโจทย์ เช่น จากรวมเลขคู่เป็นนับเลขคี่ จากค้นหาตำแหน่งแรกเป็นตำแหน่งสุดท้าย และทดสอบกรณีขอบ หากผลไม่ตรง ให้จด input ที่ทำให้ผิดแล้วไล่ค่าทีละบรรทัด จนระบุจุดผิดได้ หลีกเลี่ยงการจำ output โดยไม่เข้าใจเหตุผล</p>
