@@ -1,5 +1,4 @@
 import json,html
-from answer_details import EXTRA
 from pathlib import Path
 root=Path(__file__).resolve().parent
 esc=html.escape
@@ -7,15 +6,22 @@ head='''<!doctype html><html lang="th"><head><meta charset="utf-8"><style>@font-
 sets=[('practice.json','Practice: ข้อฝึก 60 ข้อ'),('pretest.json','Pre-test: ข้อฝึก 40 ข้อ')]
 def save(name,parts): (root/name).write_text(head+''.join(parts)+'</body></html>',encoding='utf8')
 save('lessons-print.html',[(root/'lessons.html').read_text(encoding='utf8')])
-qs=[]; ans=[]
+review=[]
+for group in json.loads((root/'review.json').read_text(encoding='utf8')):
+ review.append('<section class="newpage"><h1>แบบทบทวน · '+esc(group['title'])+'</h1>')
+ for i,q in enumerate(group['questions'],1):
+  review.append('<article><h3>ข้อ '+str(i)+'</h3><p class="question">'+esc(q['question'])+'</p><p class="answer"><b>เฉลยและเหตุผล:</b> '+esc(q['answer'])+'</p></article>')
+ review.append('</section>')
+save('review-print.html',review)
+qs=[]
 for file,label in sets:
  data=json.loads((root.parent/file).read_text(encoding='utf8'))
- qs.append('<section class="newpage"><h1>'+label+'</h1><p>ทำโจทย์ก่อนแล้วตรวจเฉลยท้ายเล่ม บางข้อมีมากกว่าหนึ่งคำตอบ ให้พิจารณาทุกตัวเลือก</p>')
- ans.append('<section class="newpage"><h1>เฉลย '+label+'</h1>')
+ qs.append('<section class="newpage"><h1>'+label+'</h1><p>เฉลยและเหตุผลอยู่ใต้โจทย์แต่ละข้อ บางข้อมีมากกว่าหนึ่งคำตอบ ให้พิจารณาทุกตัวเลือก</p>')
  for i,q in enumerate(data,1):
   qs.append('<article><h3>ข้อ '+str(i)+' · '+esc(q['category'])+'</h3><p class="question">'+esc(q['question'])+'</p>')
   if q.get('choices'): qs.append('<ol type="A">'+''.join('<li>'+esc(str(c)).replace('\n','<br>')+'</li>' for c in q['choices'])+'</ol>')
+  qs.append('<p class="answer"><b>เฉลย:</b> '+esc(q['answer'])+'</p><p><b>เหตุผล:</b> '+esc(q.get('explanation',''))+'</p>')
+  if q.get('explanation_detail'): qs.append('<p><b><mark>คิดทีละขั้น</mark>:</b> '+esc(q['explanation_detail'])+'</p>')
   qs.append('</article>')
-  ans.append('<article><h3>ข้อ '+str(i)+'</h3><p class="answer"><b>คำตอบ:</b> '+esc(q['answer'])+'</p><p><b>อธิบาย:</b> '+esc(q.get('explanation',''))+'</p>'+('<p><b><mark>คิดทีละขั้น</mark>:</b> '+esc(EXTRA[i])+'</p>' if file == 'practice.json' and i in EXTRA else '')+'</article>')
- qs.append('</section>');ans.append('</section>')
-save('questions-print.html',qs);save('answers-print.html',ans)
+ qs.append('</section>')
+save('questions-print.html',qs)

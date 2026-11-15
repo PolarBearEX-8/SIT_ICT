@@ -56,7 +56,9 @@
       .solution-box { margin-top: 12px; padding: 15px 17px; border-left: 3px solid var(--green); border-radius: 0 4px 4px 0; background: #eef8f5; }
       .solution-box[hidden] { display: none; }
       .solution-box strong { display: block; margin-bottom: 5px; color: #176c5a; font-size: 12px; }
-      .solution-box p { margin: 0; color: #49645f; font-size: 11px; line-height: 1.8; white-space: pre-wrap; }
+      .solution-box p { margin: 0; color: #385953; font-size: 15px; line-height: 1.85; white-space: pre-wrap; }
+      .solution-box p + p { margin-top: 10px; }
+      .solution-box strong { font-size: 16px; line-height: 1.6; }
       .question-nav { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-top: 16px; }
       .nav-button { min-width: 124px; min-height: 43px; padding: 0 17px; border: 1px solid #cbd9df; border-radius: 5px; color: #385260; background: white; cursor: pointer; font-size: 12px; font-weight: 700; }
       .nav-button:hover:not(:disabled) { border-color: #74c4d0; color: #087d94; }
@@ -139,7 +141,7 @@
         <div>
           <p class="eyebrow">Question Practice</p>
           <h1>โจทย์ฝึกทำ</h1>
-          <p class="heading-note">ทำทีละข้อ เลือกคำตอบ แล้วเปิดดูเฉลยเมื่อพร้อม</p>
+          <p class="heading-note">ทำทีละข้อ พร้อมเฉลยและวิธีคิดใต้โจทย์</p>
         </div>
         <label class="set-picker" for="exam-set"><span>เลือกชุดข้อสอบ</span><select id="exam-set" disabled><option>กำลังโหลดชุดข้อสอบ…</option></select></label>
       </div>
@@ -274,26 +276,16 @@
             });
             card.appendChild(fieldset);
           } else {
-            card.appendChild(textNode("p", "no-choices", "ข้อนี้ไม่มีตัวเลือกในชุดข้อมูล ลองคิดคำตอบก่อนเปิดดูเฉลย"));
+            card.appendChild(textNode("p", "no-choices", "ข้อนี้ไม่มีตัวเลือกในชุดข้อมูล อ่านวิธีคิดด้านล่างได้เลย"));
           }
 
-          const revealButton = document.createElement("button");
-          revealButton.type = "button";
-          revealButton.className = "solution-toggle";
-          revealButton.textContent = "ดูเฉลยและวิธีคิด";
-          revealButton.setAttribute("aria-expanded", "false");
           const solution = document.createElement("section");
           solution.className = "solution-box";
-          solution.hidden = true;
           solution.setAttribute("aria-label", "เฉลยและวิธีคิด");
-          solution.append(textNode("strong", "", "เฉลย: " + (item.answer || "ไม่มีเฉลย")), textNode("p", "", item.explanation || ""));
-          revealButton.addEventListener("click", function () {
-            revealed = !revealed;
-            solution.hidden = !revealed;
-            revealButton.setAttribute("aria-expanded", String(revealed));
-            revealButton.textContent = revealed ? "ซ่อนเฉลย" : "ดูเฉลยและวิธีคิด";
-          });
-          card.append(revealButton, solution);
+          solution.append(textNode("strong", "", "เฉลย: " + (item.answer || "ไม่มีเฉลย")));
+          if (item.explanation) solution.appendChild(textNode("p", "", "เหตุผล: " + item.explanation));
+          if (item.explanation_detail) solution.appendChild(textNode("p", "solution-detail", "คิดทีละขั้น: " + item.explanation_detail));
+          card.appendChild(solution);
 
           const navigation = document.createElement("div");
           navigation.className = "question-nav";
