@@ -185,6 +185,7 @@
             { id: "utcc-selection", label: "UTCC · ชุดคัดเลือก ปี 2568", questions: allQuestions.map(function (item, index) { return { item: item, index: index }; }).filter(function (entry) { return entry.item.source === "UTCC, ชุดคัดเลือก ปี 2568"; }) },
             { id: "utcc-knowledge", label: "UTCC · ชุดความรู้", questions: allQuestions.map(function (item, index) { return { item: item, index: index }; }).filter(function (entry) { return entry.item.source === "UTCC, ชุดความรู้"; }) },
             { id: "utcc-final", label: "UTCC · รอบ 10 ทีม ปี 2568", questions: allQuestions.map(function (item, index) { return { item: item, index: index }; }).filter(function (entry) { return sourceGroup(entry.item.source) === "UTCC, รอบ 10 ทีม ปี 2568"; }) },
+            { id: "utcc-practice", label: "UTCC ฝึก", questions: allQuestions.map(function (item, index) { return { item: item, index: index }; }).filter(function (entry) { return entry.item.source === "UTCC ฝึก"; }) },
             { id: "ict-2026", label: "ICT Challenge 2026 · แบบทดสอบออนไลน์", questions: ict },
             { id: "pretest", label: "Pre-test · โจทย์แต่งใหม่ตามขอบเขตความรู้", questions: allQuestions.map(function (item, index) { return { item: item, index: index }; }).filter(function (entry) { return entry.item.source === "Pre-test แต่งใหม่ตามขอบเขตความรู้"; }) }
           ];
@@ -268,6 +269,7 @@
                   current = [choiceIndex];
                 }
                 selectedAnswers[entry.index] = current;
+                if (item.source === "UTCC ฝึก") showPracticeResult(choiceIndex);
                 const navStatus = quizRoot.querySelector(".nav-status");
                 if (navStatus) navStatus.textContent = current.length ? "บันทึกคำตอบแล้ว" : "ยังไม่ได้เลือกคำตอบ";
               });
@@ -285,6 +287,15 @@
           solution.append(textNode("strong", "", "เฉลย: " + (item.answer || "ไม่มีเฉลย")));
           if (item.explanation) solution.appendChild(textNode("p", "", "เหตุผล: " + item.explanation));
           if (item.explanation_detail) solution.appendChild(textNode("p", "solution-detail", "คิดทีละขั้น: " + item.explanation_detail));
+          function showPracticeResult(choiceIndex) {
+            solution.hidden = false;
+            const correct = choices[choiceIndex] === item.answer;
+            solution.querySelector("strong").textContent = (correct ? "ตอบถูก" : "ยังไม่ถูก") + " · เฉลย: " + item.answer;
+          }
+          if (item.source === "UTCC ฝึก") {
+            solution.hidden = true;
+            if (selected.length) showPracticeResult(selected[0]);
+          }
           card.appendChild(solution);
 
           const navigation = document.createElement("div");
@@ -315,11 +326,11 @@
           renderQuestion();
         }
 
-        Promise.all(["./practice.json", "./pretest.json"].map(function (url) {
+        Promise.all(["./practice.json", "./pretest.json", "./utcc-practice.json"].map(function (url) {
           return fetch(url).then(function (response) { if (!response.ok) throw new Error("Question data unavailable"); return response.json(); });
         }))
           .then(function (data) {
-            allQuestions = data[0].concat(data[1]);
+            allQuestions = data[0].concat(data[1], data[2]);
             sets = makeSets();
             examSelect.replaceChildren();
             sets.forEach(function (set) {
